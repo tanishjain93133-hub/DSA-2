@@ -1,0 +1,114 @@
+import React from 'react';
+import { motion } from 'motion/react';
+
+import MagicBento, { BentoCardData } from './MagicBento';
+
+const lightingFeatures: BentoCardData[] = [
+  {
+    title: 'Precision Craftsmanship',
+    label: 'Timber',
+    description: 'Each light is carefully crafted from high-quality teak wood, ensuring durability, fine detailing, and a premium finish.',
+    image: 'https://lh3.googleusercontent.com/d/1-ILs6rwqAfEtUI8AflcAxY-TsXzUaoBu'
+  },
+  {
+    title: 'Smart Lighting Technology',
+    label: 'Adaptive',
+    description: 'Our lights are designed with modern technology to provide optimal brightness and energy efficiency.',
+    image: 'https://lh3.googleusercontent.com/d/1fHnbBfD-IH9gxBz_6pQBTUsTew3ZJxK8'
+  },
+  {
+    title: 'Sustainable Wood Collection',
+    label: 'Premium',
+    description: 'Made from responsibly sourced wood, our designs are eco-friendly and built to age gracefully.',
+    image: 'https://lh3.googleusercontent.com/d/17NYOPkg-hZDh_UzXgDnWdyJHeMqO9FPK'
+  },
+  {
+    title: 'Atmosphere & Ambience',
+    label: 'Experience',
+    description: '2700K warmth for a natural architectural feel that bridges nature and home.',
+    image: 'https://lh3.googleusercontent.com/d/1Nm_L8ff0v_yIPqcLYfHRXOaanzla8d49'
+  },
+  {
+    title: 'Sculptural Form',
+    label: 'Design',
+    description: 'Unique miniature architectural sculptures.',
+    image: 'https://lh3.googleusercontent.com/d/1EsMLe08jkprzx3ZDo1GAcmzZH3N-Frpp'
+  },
+  {
+    title: 'Artisanal Detail',
+    label: 'Finish',
+    description: 'Hand-rubbed natural oil for lasting texture.',
+    image: 'https://lh3.googleusercontent.com/d/1VizU1uLT7de9piaTNGn2dJ3PFC1Bqc9h'
+  }
+];
+
+export const Lights: React.FC = () => {
+  return (
+    <section id="lights" className="py-24 relative overflow-hidden bg-black">
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-electric-purple/10 blur-[180px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left Column: 4 Photos Grid */}
+          <div className="grid grid-cols-2 gap-4 order-2 lg:order-1">
+            {lightingFeatures.slice(0, 4).map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="aspect-square rounded-3xl overflow-hidden border border-white/10 glass p-2 group"
+              >
+                <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right Column: Narrative Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="order-1 lg:order-2 self-start pt-4"
+          >
+            <span className="text-neon-cyan text-[10px] font-bold tracking-[0.6em] uppercase block opacity-60 mb-6">
+              The Heritage
+            </span>
+            <h2 className="text-4xl md:text-6xl xl:text-7xl font-black tracking-tighter leading-tight text-white mb-8 whitespace-nowrap">
+              The Timber <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-electric-purple">Lights.</span>
+            </h2>
+            
+            <p className="text-white/80 text-lg md:text-xl font-light mb-12 leading-relaxed">
+              Experience the beauty of natural wood lighting designed for modern living. 
+              Our handcrafted timber lights combine premium quality wood with elegant design, 
+              adding warmth and sophistication to any space. Perfect for homes, offices, 
+              and luxury interiors, our lights are built to enhance both style and functionality.
+            </p>
+
+            <div className="grid grid-cols-1 gap-8">
+              {lightingFeatures.slice(0, 3).map((feature, i) => (
+                <div key={i} className="flex items-start gap-4">
+                  <div className="w-1 h-12 bg-gradient-to-b from-neon-cyan to-transparent shrink-0" />
+                  <div>
+                    <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">{feature.title}</h4>
+                    <p className="text-white/70 text-sm leading-relaxed max-w-md">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};

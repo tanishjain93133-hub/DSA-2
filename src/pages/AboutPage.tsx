@@ -1,0 +1,203 @@
+import React, { useEffect } from 'react';
+import { motion } from 'motion/react';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { NebulaBackground } from '../components/NebulaBackground';
+import { LayoutGrid, Palette, ShieldCheck, Award, Users, Lightbulb } from 'lucide-react';
+import { Assembly } from '../components/Assembly';
+import { ChromaGrid } from '../components/ChromaGrid';
+import { cn } from '@/src/lib/utils';
+
+export const AboutPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const teamItems = [
+    {
+      image: "https://lh3.googleusercontent.com/d/1BT3pRmGdLIuhIMnLvdhEyVchTxedONn-",
+      title: "Tanish Jain",
+      subtitle: "Social Media Manager & Website Developer",
+      handle: "@tanishjain",
+      borderColor: "#00F3FF",
+      gradient: "linear-gradient(145deg, #00F3FF, #000)",
+    },
+    {
+      image: "https://lh3.googleusercontent.com/d/10nFCmvCeEitMYkquFOZlifiAI7sbZdrh",
+      title: "Dhruv Solanki",
+      subtitle: "Junior architecture",
+      handle: "@dhruvsolanki",
+      borderColor: "#00F3FF",
+      gradient: "linear-gradient(180deg, #00F3FF, #000)",
+    }
+  ];
+
+  return (
+    <div className="relative min-h-screen bg-black">
+      {/* Cinematic Watermark matching Gallery style */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 touch-none overflow-hidden">
+        <h2 className="text-white/[0.03] text-[200px] md:text-[450px] font-black uppercase tracking-tighter select-none rotate-12">About</h2>
+      </div>
+
+      <div className="fixed inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+          alt="Architectural Backdrop" 
+          className="w-full h-full object-cover opacity-20 grayscale brightness-50"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+      </div>
+      <Navbar />
+      
+      <main className="pt-32 pb-20">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Hero Section of About Page */}
+          <section className="mb-20 relative">
+            <div className="flex justify-between items-start mb-12 border-b border-white/10 pb-12">
+              {/* "About" Label - Top Left Corner */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex flex-col gap-2"
+              >
+                <span className="text-neon-cyan text-[10px] font-bold tracking-[1em] uppercase font-mono">
+                   About
+                </span>
+                <span className="text-white/40 text-4xl font-extralight tracking-tighter uppercase">Studio</span>
+              </motion.div>
+
+              {/* DSA Headline - Central and Small */}
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute left-1/2 -translate-x-1/2 top-0"
+              >
+                <h1 className="text-[10px] md:text-xs font-bold text-white tracking-[0.6em] uppercase border border-white/20 px-8 py-3 rounded-full bg-black/40 backdrop-blur-md">
+                  DSA Architects & Interior Design
+                </h1>
+              </motion.div>
+              
+              {/* Optional Right Accoutrement to balance */}
+              <div className="hidden md:block text-right">
+                 <span className="text-white/40 text-[10px] font-mono tracking-widest uppercase">Est. 2021</span>
+              </div>
+            </div>
+
+            {/* Split Content Layout */}
+            <div className="grid lg:grid-cols-12 gap-16 items-start relative z-10">
+              {/* Description Column - Left */}
+              <div className="lg:col-span-8 space-y-8">
+                <motion.div 
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <p className="text-white text-2xl md:text-4xl font-light leading-snug tracking-tight mb-8 max-w-4xl">
+                    <strong className="text-white font-bold border-b border-white/20 pb-1">DSA Architects & Interior Design</strong> is a creative studio dedicated to designing modern, functional, and elegant spaces.
+                  </p>
+                  <div className="w-20 h-[1px] bg-white/20 mb-8" />
+                  <p className="text-white/80 text-xl font-light leading-relaxed">
+                    Founded in 2021 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
+                  </p>
+                </motion.div>
+                
+                <motion.p 
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-white/80 text-lg md:text-xl leading-relaxed font-light"
+                >
+                  We believe that every space should be a perfect balance of aesthetics and functionality. From residential homes to commercial projects, we work closely with our clients to understand their vision and bring it to life with precision and creativity.
+                </motion.p>
+
+                <motion.p 
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="text-white/80 text-lg md:text-xl leading-relaxed font-light"
+                >
+                  Our approach is simple — clear planning, premium materials, and professional execution. We ensure timely project delivery, transparent processes, and attention to every detail, so our clients get the best results without compromise.
+                </motion.p>
+
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="pt-8 border-t border-white/10"
+                >
+                  <p className="text-white font-light text-2xl md:text-3xl tracking-tight leading-snug italic">
+                    With a strong foundation in design and innovation, DSA continues to create spaces that are not just beautiful, but meaningful and long-lasting.
+                  </p>
+                </motion.div>
+              </div>
+
+              {/* Sidebar - Right side small gap maintained by gap-16 and lg:col-span-4 */}
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="lg:col-span-4 lg:sticky lg:top-40 space-y-8 pl-12 border-l border-white/10"
+              >
+                <div>
+                  <h4 className="text-neon-cyan text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Established</h4>
+                  <p className="text-white text-2xl font-light">October 2021</p>
+                </div>
+                <div>
+                  <h4 className="text-neon-cyan text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Specialization</h4>
+                  <p className="text-white text-xl font-light leading-relaxed">
+                    Corporate Offices<br />
+                    Premium Residency<br />
+                    Boutique Retail
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-neon-cyan text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Location</h4>
+                  <p className="text-white text-xl font-light">Ahmedabad, India</p>
+                </div>
+                <div className="pt-12">
+                   <div className="w-16 h-16 rounded-2xl glass border border-neon-cyan/20 flex items-center justify-center group overflow-hidden">
+                      <div className="w-3 h-3 rounded-full bg-neon-cyan animate-pulse group-hover:scale-150 transition-transform" />
+                   </div>
+                   <p className="text-[10px] text-white/60 uppercase tracking-[0.4em] mt-6 font-bold">Studio Status</p>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Founder Section Integration */}
+          <div id="founder-detailed" className="mt-4">
+            <Assembly />
+          </div>
+
+          {/* ChromaGrid Team Section */}
+          <section className="mt-32 mb-24 px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex flex-col items-center mb-16">
+                <h2 className="text-white text-5xl font-light tracking-[0.2em] uppercase mb-4">Our Team</h2>
+                <div className="w-24 h-[1px] bg-neon-cyan/50" />
+              </div>
+              
+              <div className="relative min-h-[600px] md:h-[600px]">
+                <ChromaGrid 
+                  items={teamItems}
+                  radius={350}
+                  damping={0.4}
+                  fadeOut={0.6}
+                  columns={2}
+                  ease="power3.out"
+                  className="team-chroma-grid"
+                />
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
