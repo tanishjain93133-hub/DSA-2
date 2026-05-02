@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, MapPin, Calendar, Layers, ExternalLink, X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Layers, ExternalLink, X, ZoomIn, ChevronLeft, ChevronRight, LayoutGrid, Maximize2 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import CircularGallery from '../components/CircularGallery';
@@ -50,7 +50,7 @@ const BUSINESS_CENTER_GALLERY = [
   { image: 'https://lh3.googleusercontent.com/d/16UwjT1SSzMIS4bVDiB8ZcntJuJcSwtrQ', text: 'Business Center 03' },
   { image: 'https://lh3.googleusercontent.com/d/1HSEFBOKUnegGjnvvY9xXcSnL7GAKoDXe', text: 'Business Center 04' },
   { image: 'https://lh3.googleusercontent.com/d/1Hz8q7vk9cTql7XREXBHLQG1tjQ1E-VOc', text: 'Business Center 05' },
-  { image: 'https://lh3.googleusercontent.com/d/1JHPhEFvokVoMViai2JRY2C97I_wcZ5Ap', text: 'Business Center 06' },
+  { image: 'https://lh3.googleusercontent.com/d/1JHPhEFvokMViai2JRY2C97I_wcZ5Ap', text: 'Business Center 06' },
   { image: 'https://lh3.googleusercontent.com/d/1MHk72anDHYgYGtCAuWJx2GWJ02Ts97UC', text: 'Business Center 07' },
   { image: 'https://lh3.googleusercontent.com/d/1NPceFslGWT3fUyWn6AGSqGJPxh0a4j1A', text: 'Business Center 08' },
   { image: 'https://lh3.googleusercontent.com/d/1O5txCTxKc9EoSV62XE9b09ds8eZtQ61r', text: 'Business Center 09' },
@@ -316,17 +316,17 @@ const PROJECTS_DATA = [
   },
   {
     id: 'comm-dsa-05',
-    title: 'Minimalist Home',
-    subtitle: 'Safal Commercial',
+    title: 'Safal Commercial',
+    subtitle: 'Contemporary Excellence',
     description: 'A contemporary commercial landmark emphasizing purity of form and functional minimalism.',
-    fullStory: 'Minimalist Home (Safal) redefines the commercial landscape with its focus on clean lines, open spaces, and integrated natural light.',
+    fullStory: 'Safal Commercial redefines the modern workspace with its focus on clean lines, open spaces, and integrated natural light.',
     metadata: [
       { label: 'Location', value: 'Ahmedabad, Gujarat', icon: <MapPin size={16} /> },
       { label: 'Year', value: '2024', icon: <Calendar size={16} /> },
       { label: 'Area', value: '45,000 sq.ft', icon: <Layers size={16} /> },
       { label: 'Status', value: 'Completed', icon: <ExternalLink size={16} /> },
     ],
-    galleryItems: MINIMALIST_HOME_GALLERY
+    galleryItems: SAFAL_COMMERCIAL_GALLERY
   },
   {
     id: 'res-dsa-03',
@@ -439,6 +439,7 @@ export const ProjectDetailPage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = React.useState<'case-study' | 'gallery'>('case-study');
+  const [gallerySubView, setGallerySubView] = React.useState<'immersion' | 'grid'>('immersion');
 
   const slideTo = (index: number) => {
     if (index < 0 || index >= project.galleryItems.length) return;
@@ -614,138 +615,184 @@ export const ProjectDetailPage: React.FC = () => {
                     </h2>
                   </motion.div>
                   
-                  {/* Slider Controls */}
-                  <div className="flex gap-4 mb-2">
-                    <button 
-                      onClick={() => slideTo((currentIndex - 1 + project.galleryItems.length) % project.galleryItems.length)}
-                      className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all group"
-                    >
-                      <ChevronLeft size={24} className="group-active:scale-90 transition-transform" />
-                    </button>
-                    <button 
-                      onClick={() => slideTo((currentIndex + 1) % project.galleryItems.length)}
-                      className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all group"
-                    >
-                      <ChevronRight size={24} className="group-active:scale-90 transition-transform" />
-                    </button>
+                  {/* Mode & Slider Controls */}
+                  <div className="flex flex-col md:flex-row items-center gap-8 mb-2">
+                    {/* View Toggle */}
+                    <div className="flex p-1 bg-white/5 rounded-full border border-white/10 backdrop-blur-xl">
+                      <button 
+                        onClick={() => setGallerySubView('immersion')}
+                        className={cn(
+                          "px-6 py-2 rounded-full text-[9px] font-bold tracking-widest uppercase transition-all flex items-center gap-2",
+                          gallerySubView === 'immersion' ? "bg-white text-black shadow-lg" : "text-white/40 hover:text-white"
+                        )}
+                      >
+                        <Maximize2 size={12} /> Immersion
+                      </button>
+                      <button 
+                        onClick={() => setGallerySubView('grid')}
+                        className={cn(
+                          "px-6 py-2 rounded-full text-[9px] font-bold tracking-widest uppercase transition-all flex items-center gap-2",
+                          gallerySubView === 'grid' ? "bg-white text-black shadow-lg" : "text-white/40 hover:text-white"
+                        )}
+                      >
+                        <LayoutGrid size={12} /> Grid
+                      </button>
+                    </div>
+
+                    {gallerySubView === 'immersion' && (
+                      <div className="flex gap-4">
+                        <button 
+                          onClick={() => slideTo((currentIndex - 1 + project.galleryItems.length) % project.galleryItems.length)}
+                          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all group"
+                        >
+                          <ChevronLeft size={24} className="group-active:scale-90 transition-transform" />
+                        </button>
+                        <button 
+                          onClick={() => slideTo((currentIndex + 1) % project.galleryItems.length)}
+                          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all group"
+                        >
+                          <ChevronRight size={24} className="group-active:scale-90 transition-transform" />
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
-                <div 
-                  className="relative w-full overflow-visible pb-12 perspective-[2000px] mt-24"
-                  style={{ height: '70vh', maxHeight: '700px' }}
-                >
-                  <div className="flex items-center justify-center h-full relative">
-                    <AnimatePresence initial={false} mode="popLayout">
-                      {[-2, -1, 0, 1, 2].map((offset) => {
-                        const index = (currentIndex + offset + project.galleryItems.length) % project.galleryItems.length;
-                        const item = project.galleryItems[index];
-                        
-                        return (
-                          <motion.div
-                            key={`${index}-${offset}`}
-                            initial={{ 
-                              opacity: 0, 
-                              scale: 0.5,
-                              x: offset * 400,
-                              rotateY: offset * 45,
-                              z: -Math.abs(offset) * 200
-                            }}
-                            animate={{ 
-                              opacity: 1 - Math.abs(offset) * 0.3,
-                              scale: 1 - Math.abs(offset) * 0.15,
-                              x: offset * (window.innerWidth < 768 ? 220 : 450),
-                              rotateY: offset * -25,
-                              z: -Math.abs(offset) * 150,
-                              zIndex: 10 - Math.abs(offset)
-                            }}
-                            exit={{ 
-                              opacity: 0, 
-                              scale: 0.5,
-                              x: offset * 400,
-                              z: -500 
-                            }}
-                            transition={{ 
-                              type: "spring", 
-                              stiffness: 300, 
-                              damping: 30,
-                              opacity: { duration: 0.2 }
-                            }}
-                            className={cn(
-                              "absolute h-[60vh] md:h-[70vh] max-h-[800px] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 flex items-center justify-center",
-                              offset === 0 
-                                ? "bg-white/5 border border-white/40 shadow-[0_40px_100px_-20px_rgba(255,255,255,0.15)] ring-1 ring-white/20" 
-                                : "bg-white/5 border border-white/10 opacity-30 grayscale blur-[1px]"
-                            )}
-                            style={{ 
-                              width: 'auto',
-                              minWidth: window.innerWidth < 768 ? '80vw' : '400px'
-                            }}
-                            onClick={() => {
-                              if (offset === 0) setSelectedImage(item.image);
-                              else slideTo(index);
-                            }}
-                          >
-                            <div className="w-full h-full relative flex items-center justify-center">
-                              {/* Inner soft glow for the active image */}
-                              {offset === 0 && (
-                                <div className="absolute inset-0 bg-white/[0.02] pointer-events-none z-20" />
-                              )}
-                              <img
-                                src={item.image}
-                                alt={item.text}
-                                className={cn(
-                                  "h-full w-auto object-contain transition-all duration-1000 selection:bg-none",
-                                  offset === 0 ? "scale-100" : "scale-95 blur-[2px]"
-                                )}
-                                referrerPolicy="no-referrer"
-                              />
-                            </div>
+                {gallerySubView === 'immersion' ? (
+                  <>
+                    <div 
+                      className="relative w-full overflow-visible pb-12 perspective-[2000px] mt-24"
+                      style={{ height: '70vh', maxHeight: '700px' }}
+                    >
+                      <div className="flex items-center justify-center h-full relative">
+                        <AnimatePresence initial={false}>
+                          {[-2, -1, 0, 1, 2].map((offset) => {
+                            const index = (currentIndex + offset + project.galleryItems.length) % project.galleryItems.length;
+                            const item = project.galleryItems[index];
                             
-                            {offset === 0 && (
-                              <motion.div 
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-8 flex justify-end"
+                            return (
+                              <motion.div
+                                key={item.image}
+                                initial={false}
+                                animate={{ 
+                                  opacity: 1 - Math.abs(offset) * 0.3,
+                                  scale: 1 - Math.abs(offset) * 0.15,
+                                  x: offset * (window.innerWidth < 768 ? 220 : 450),
+                                  rotateY: offset * -25,
+                                  z: -Math.abs(offset) * 150,
+                                  zIndex: 10 - Math.abs(offset)
+                                }}
+                                transition={{ 
+                                  type: "spring", 
+                                  stiffness: 260, 
+                                  damping: 30,
+                                  opacity: { duration: 0.2 }
+                                }}
+                                className={cn(
+                                  "absolute h-[60vh] md:h-[70vh] max-h-[800px] rounded-2xl overflow-hidden cursor-pointer selection:bg-none",
+                                  offset === 0 
+                                    ? "bg-white/5 border border-white/40 shadow-[0_40px_100px_-20px_rgba(255,255,255,0.15)] ring-1 ring-white/20" 
+                                    : "bg-white/5 border border-white/10 opacity-30 grayscale blur-[1px]"
+                                )}
+                                style={{ 
+                                  width: 'auto',
+                                  minWidth: window.innerWidth < 768 ? '80vw' : '400px'
+                                }}
+                                onClick={() => {
+                                  if (offset === 0) setSelectedImage(item.image);
+                                  else slideTo(index);
+                                }}
                               >
-                                <div className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
-                                  <ZoomIn className="text-white" size={20} />
+                                <div className="w-full h-full relative flex items-center justify-center">
+                                  {/* Inner soft glow for the active image */}
+                                  {offset === 0 && (
+                                    <div className="absolute inset-0 bg-white/[0.02] pointer-events-none z-20" />
+                                  )}
+                                  <img
+                                    src={item.image}
+                                    alt={item.text}
+                                    loading="lazy"
+                                    className={cn(
+                                      "h-full w-auto object-contain transition-all duration-1000",
+                                      offset === 0 ? "scale-100" : "scale-95 blur-[2px]"
+                                    )}
+                                    referrerPolicy="no-referrer"
+                                  />
                                 </div>
+                                
+                                {offset === 0 && (
+                                  <motion.div 
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-8 flex justify-end"
+                                  >
+                                    <div className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
+                                      <ZoomIn className="text-white" size={20} />
+                                    </div>
+                                  </motion.div>
+                                )}
                               </motion.div>
-                            )}
-                          </motion.div>
-                        );
-                      })}
-                    </AnimatePresence>
-                  </div>
-                </div>
+                            );
+                          })}
+                        </AnimatePresence>
+                      </div>
+                    </div>
 
-                {/* Connected Progress Line */}
-                <div className="max-w-5xl mx-auto px-6 mt-12 relative h-1 bg-white/5 rounded-full overflow-hidden">
-                  <motion.div 
-                    className="absolute top-0 left-0 h-full bg-neon-cyan shadow-[0_0_15px_rgba(0,255,255,0.8)]"
-                    initial={false}
-                    animate={{ 
-                      left: `${(currentIndex / project.galleryItems.length) * 100}%`,
-                      width: `${(1 / project.galleryItems.length) * 100}%`
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                  {/* Segmentation markers */}
-                  <div className="absolute inset-0 flex justify-between">
-                    {project.galleryItems.map((_, i) => (
-                      <div key={i} className="w-[1px] h-full bg-black/40" />
-                    ))}
-                  </div>
-                </div>
+                    {/* Connected Progress Line */}
+                    <div className="max-w-5xl mx-auto px-6 mt-12 relative h-1 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div 
+                        className="absolute top-0 left-0 h-full bg-neon-cyan shadow-[0_0_15px_rgba(0,255,255,0.8)]"
+                        initial={false}
+                        animate={{ 
+                          left: `${(currentIndex / project.galleryItems.length) * 100}%`,
+                          width: `${(1 / project.galleryItems.length) * 100}%`
+                        }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                      {/* Segmentation markers */}
+                      <div className="absolute inset-0 flex justify-between">
+                        {project.galleryItems.map((_, i) => (
+                          <div key={i} className="w-[1px] h-full bg-black/40" />
+                        ))}
+                      </div>
+                    </div>
 
-                <div className="max-w-7xl mx-auto px-6 mt-10 flex items-center gap-6">
-                   <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10" />
-                   <p className="text-white/40 text-[10px] font-black tracking-[0.8em] uppercase whitespace-nowrap">
-                     Visual Archive <span className="text-neon-cyan">{String(currentIndex + 1).padStart(2, '0')}</span> / {String(project.galleryItems.length).padStart(2, '0')}
-                   </p>
-                   <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
-                </div>
+                    <div className="max-w-7xl mx-auto px-6 mt-10 flex items-center gap-6">
+                       <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                       <p className="text-white/40 text-[10px] font-black tracking-[0.8em] uppercase whitespace-nowrap">
+                         Visual Archive <span className="text-neon-cyan">{String(currentIndex + 1).padStart(2, '0')}</span> / {String(project.galleryItems.length).padStart(2, '0')}
+                       </p>
+                       <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
+                    </div>
+                  </>
+                ) : (
+                  <div className="max-w-7xl mx-auto px-6 mt-12">
+                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+                       {project.galleryItems.map((item, i) => (
+                         <motion.div
+                           key={i}
+                           initial={{ opacity: 0, y: 20 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           transition={{ delay: i * 0.05 }}
+                           className="aspect-[4/5] rounded-2xl overflow-hidden bg-white/5 border border-white/10 cursor-pointer group relative shadow-2xl"
+                           onClick={() => setSelectedImage(item.image)}
+                         >
+                           <img 
+                             src={item.image} 
+                             alt={item.text}
+                             loading="lazy"
+                             className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110 brightness-75 group-hover:brightness-100"
+                             referrerPolicy="no-referrer"
+                           />
+                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-bold tracking-widest uppercase mb-1">{item.text}</span>
+                              <div className="w-8 h-[1px] bg-neon-cyan" />
+                           </div>
+                         </motion.div>
+                       ))}
+                     </div>
+                  </div>
+                )}
               </section>
             </motion.div>
           )}

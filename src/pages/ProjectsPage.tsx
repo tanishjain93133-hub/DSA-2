@@ -83,8 +83,8 @@ const PROJECTS_IMAGES = [
   },
   {
     id: 'comm-dsa-05',
-    src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Tech Hub',
+    src: 'https://lh3.googleusercontent.com/d/1GqZsuB4FzUy9H9QA2Cnm0_ZPTsVWxnhs',
+    alt: 'Safal Commercial',
     category: 'Commercial'
   },
   {

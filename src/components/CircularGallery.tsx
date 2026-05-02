@@ -394,24 +394,15 @@ class App {
   }
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
-      heightSegments: 50,
-      widthSegments: 100
+      heightSegments: 10,
+      widthSegments: 10
     });
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
-      { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: 'Bridge' },
-      { image: `https://picsum.photos/seed/2/800/600?grayscale`, text: 'Desk Setup' },
-      { image: `https://picsum.photos/seed/3/800/600?grayscale`, text: 'Waterfall' },
-      { image: `https://picsum.photos/seed/4/800/600?grayscale`, text: 'Strawberries' },
-      { image: `https://picsum.photos/seed/5/800/600?grayscale`, text: 'Deep Diving' },
-      { image: `https://picsum.photos/seed/16/800/600?grayscale`, text: 'Train Track' },
-      { image: `https://picsum.photos/seed/17/800/600?grayscale`, text: 'Santorini' },
-      { image: `https://picsum.photos/seed/8/800/600?grayscale`, text: 'Blurry Lights' },
-      { image: `https://picsum.photos/seed/9/800/600?grayscale`, text: 'New York' },
-      { image: `https://picsum.photos/seed/10/800/600?grayscale`, text: 'Good Boy' },
-      { image: `https://picsum.photos/seed/21/800/600?grayscale`, text: 'Coastline' },
-      { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
+      { image: `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop`, text: 'Bridge' },
+      { image: `https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop`, text: 'Desk Setup' },
+      { image: `https://images.unsplash.com/photo-1493397212122-2b85edf36af6?q=80&w=800&auto=format&fit=crop`, text: 'Waterfall' },
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
@@ -435,35 +426,30 @@ class App {
       });
     });
   }
-  onTouchDown(e) {
+
+  onTouchDown(e: any) {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
-    
-    // Check for click
     this.clickStartTime = Date.now();
   }
-  onTouchMove(e) {
+
+  onTouchMove(e: any) {
     if (!this.isDown) return;
     const x = e.touches ? e.touches[0].clientX : e.clientX;
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
     this.scroll.target = this.scroll.position + distance;
   }
-  onTouchUp(e) {
+
+  onTouchUp(e: any) {
     this.isDown = false;
     this.onCheck();
     
-    // Check for click
-    if (Date.now() - this.clickStartTime < 200 && this.onImageClick) {
-      // Very basic intersection test
-      const mouse = {
-        x: (this.start / this.screen.width) * 2 - 1,
-        y: -(e.clientY / this.screen.height) * 2 + 1
-      };
-      
-      // Since it is a specialized component, we won't implement a full raycaster for now
-      // but just inform it's clicked. For a real gallery, clicking the image should open it.
-      // We'll pass the item corresponding to the most central image.
+    // Check for click - only if move distance was small
+    const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const moveDist = Math.abs(this.start - x);
+
+    if (Date.now() - this.clickStartTime < 250 && moveDist < 20 && this.onImageClick) {
       const width = this.medias[0].width;
       const itemIndex = Math.round(this.scroll.current / width);
       const actualIndex = ((itemIndex % this.mediasImages.length) + this.mediasImages.length) % this.mediasImages.length;

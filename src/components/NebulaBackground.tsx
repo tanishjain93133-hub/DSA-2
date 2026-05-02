@@ -61,7 +61,7 @@ export const NebulaBackground: React.FC = () => {
       canvas.height = height;
       
       particles = [];
-      const particleCount = Math.floor((width * height) / 20000);
+      const particleCount = Math.floor((width * height) / 45000);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle(width, height));
       }

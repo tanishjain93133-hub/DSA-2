@@ -26,7 +26,7 @@ const GALLERY_ITEMS = [
   { image: 'https://images.unsplash.com/photo-1518005020250-58003994cd32?q=80&w=2070&auto=format&fit=crop', text: 'Minimalist Staircase' },
   { image: 'https://images.unsplash.com/photo-1483366759022-7a7dba23c5d4?q=80&w=2070&auto=format&fit=crop', text: 'Library Hub' },
   { image: 'https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=2070&auto=format&fit=crop', text: 'Modernist Structure' },
-  { image: 'https://images.unsplash.com/photo-1449156001931-828bccada99e?q=80&w=2070&auto=format&fit=crop', text: 'Minimalist Home' },
+  { image: 'https://lh3.googleusercontent.com/d/1GqZsuB4FzUy9H9QA2Cnm0_ZPTsVWxnhs', text: 'Safal Commercial' },
   { image: 'https://images.unsplash.com/photo-1511227449266-993c1350a588?q=80&w=2070&auto=format&fit=crop', text: 'Geometric Glass' },
 ];
 

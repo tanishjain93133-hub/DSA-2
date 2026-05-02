@@ -31,6 +31,19 @@ const stackImages = [
 ];
 
 export const Projects: React.FC = () => {
+  const memoizedCards = React.useMemo(() => stackImages.map((src, i) => (
+    <div key={i} className="w-full h-full relative p-2">
+      <img 
+        src={src} 
+        alt={`card-${i + 1}`} 
+        className="w-full h-full object-cover rounded-[2rem] border border-white/10 shadow-xl"
+        referrerPolicy="no-referrer"
+        loading="lazy"
+      />
+      <div className="absolute inset-2 rounded-[2rem] bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
+    </div>
+  )), []);
+
   return (
     <section id="projects" className="pt-0 pb-16 bg-black/30">
       <div className="mb-12">
@@ -87,17 +100,7 @@ export const Projects: React.FC = () => {
                 randomRotation={true}
                 sensitivity={180}
                 sendToBackOnClick={true}
-                cards={stackImages.map((src, i) => (
-                  <div key={i} className="w-full h-full relative p-2">
-                    <img 
-                      src={src} 
-                      alt={`card-${i + 1}`} 
-                      className="w-full h-full object-cover rounded-[2rem] border border-white/10 shadow-xl"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-2 rounded-[2rem] bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
-                  </div>
-                ))}
+                cards={memoizedCards}
               />
             </div>
 
