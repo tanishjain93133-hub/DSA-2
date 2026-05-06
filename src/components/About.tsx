@@ -39,6 +39,12 @@ export const About: React.FC = () => {
                 alt="DSA Architectural Studio"
                 className="w-full h-full object-cover rounded-2xl"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (img.src.includes('lh3.googleusercontent.com/d/')) {
+                    img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
+                  }
+                }}
               />
             </div>
           </motion.div>

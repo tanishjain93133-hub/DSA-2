@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
+import DomeGallery from '../components/DomeGallery';
+import { Footer } from '../components/Footer';
 import { cn } from '@/src/lib/utils';
 
 import { HomeGallery } from '../components/HomeGallery';
@@ -225,7 +227,7 @@ export const ProjectsPage: React.FC = () => {
       </section>
 
       {/* Filter Section - High Energy Cinematic Style */}
-      <section className="bg-black py-16 border-b border-white/5 relative overflow-hidden">
+      <section className="bg-black pt-20 pb-8 border-b border-white/5 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neon-cyan/20 rounded-full blur-[120px] animate-pulse" />
@@ -236,7 +238,7 @@ export const ProjectsPage: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="text-center mb-12"
+            className="text-center mb-0"
           >
             <span className="text-neon-cyan text-[10px] font-black tracking-[1em] uppercase block mb-4">Discovery</span>
             <h2 className="text-white text-3xl md:text-5xl font-display font-thin tracking-widest uppercase">
@@ -333,65 +335,111 @@ export const ProjectsPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-20 px-6 py-16 bg-obsidian/40 backdrop-blur-3xl border-y border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col gap-32">
-            {filteredProjects.map((project, i) => (
-              <motion.div 
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: i * 0.1 }}
-                className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
-              >
-                <div className="w-full md:w-1/2 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 group relative">
-                  <img 
-                    src={project.src} 
-                    alt={project.alt} 
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover object-top transition-all duration-1000 hover:scale-110"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const img = e.currentTarget;
-                      if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                        img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                      }
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-                <div className="w-full md:w-1/2 flex flex-col gap-8">
-                  <span className="text-neon-cyan text-[11px] font-bold tracking-[0.5em] uppercase">Featured Case Study</span>
-                  <h3 className="text-4xl md:text-6xl font-display font-thin text-white tracking-tight">{project.alt}</h3>
-                  <p className="text-white/40 text-base leading-relaxed max-w-md font-light">
-                    Redefining contemporary living through an uncompromising commitment to structural integrity and spatial harmony. This project stands as a testament to the DSA design philosophy.
-                  </p>
-                  <div className="flex gap-6">
-                    <Link to={`/project/${project.id}`}>
-                      <button className="px-10 py-4 rounded-full bg-white text-obsidian text-[10px] font-bold tracking-widest uppercase hover:bg-neon-cyan transition-all">
-                        Case Study
-                      </button>
-                    </Link>
-                    <Link to={`/project/${project.id}#gallery`}>
-                      <button className="px-10 py-4 rounded-full border border-white/10 text-white text-[10px] font-bold tracking-widest uppercase hover:bg-white/5 transition-all">
-                        Gallery
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AnimatePresence mode="wait">
+        {activeFilter === 'Other' ? (
+          <motion.section 
+            key="dome-gallery"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="relative h-[85vh] w-full bg-[#050505] overflow-hidden border-y border-white/5"
+          >
+            <div className="absolute top-16 left-1/2 -translate-x-1/2 z-10 text-center">
+               <span className="text-neon-cyan text-[10px] font-black tracking-[1em] uppercase block mb-2">Immersive Experience</span>
+               <h3 className="text-white text-2xl font-display font-thin tracking-widest uppercase">Conceptual Archive</h3>
+            </div>
+            <DomeGallery 
+              images={[
+                'https://lh3.googleusercontent.com/d/1XibxVzxzjgvmI85XDUywtUpJTUus7bzM',
+                'https://lh3.googleusercontent.com/d/1zaZHAGa2m57NF8IZXKgQfkCN6--SVy3I',
+                'https://lh3.googleusercontent.com/d/1lT_rM9G9pB9t4vHywDCfQy7h5OHwJM41',
+                'https://lh3.googleusercontent.com/d/1ATpVoCZUuKvgssfy4TcClIPCA6v8K3yz',
+                'https://lh3.googleusercontent.com/d/1UlOsOlkAnM_Z-ohufO0QsFR1gQ7NzcnK',
+                'https://lh3.googleusercontent.com/d/18wghnSqoU4DceWGwb3OrGqMIb-bCrx_4',
+                'https://lh3.googleusercontent.com/d/1Tzq0ooCQnYLh-F6ns11Wfy1QK7K3W0jh',
+                'https://lh3.googleusercontent.com/d/1fQxUcOX6Xya8S1QgM-SEPknvST3Z-XPV',
+                'https://lh3.googleusercontent.com/d/1_BEEwFeRswSl-qmhg6cGM3CSVZBNxitc',
+                'https://lh3.googleusercontent.com/d/1n1BRt7ypqRy_2DlVe1vLwKxtfrSIOAor',
+                'https://lh3.googleusercontent.com/d/11TbTFOKmmDw5GgkEcUPklEkQgWW9u06Z',
+                'https://lh3.googleusercontent.com/d/1GqZsuB4FzUy9H9QA2Cnm0_ZPTsVWxnhs',
+              ]}
+              fit={0.6}
+              grayscale={false}
+              overlayBlurColor="#050505"
+              openedImageWidth="80vw"
+              openedImageHeight="80vh"
+            />
+          </motion.section>
+        ) : (
+          <motion.section 
+            key="list-gallery"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="relative z-20 px-6 py-20 bg-obsidian/40 backdrop-blur-3xl border-y border-white/5"
+          >
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col gap-20">
+                {filteredProjects.map((project, i) => (
+                  <motion.div 
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: i * 0.1 }}
+                    className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
+                  >
+                    <div className="w-full md:w-1/2 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 group relative">
+                      <img 
+                        src={project.src} 
+                        alt={project.alt} 
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover object-top transition-all duration-1000 hover:scale-110"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          if (img.src.includes('lh3.googleusercontent.com/d/')) {
+                            img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
+                          }
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
+                    <div className="w-full md:w-1/2 flex flex-col gap-8">
+                      <span className="text-neon-cyan text-[11px] font-bold tracking-[0.5em] uppercase">Featured Case Study</span>
+                      <h3 className="text-4xl md:text-6xl font-display font-thin text-white tracking-tight">{project.alt}</h3>
+                      <p className="text-white/40 text-base leading-relaxed max-w-md font-light">
+                        Redefining contemporary living through an uncompromising commitment to structural integrity and spatial harmony. This project stands as a testament to the DSA design philosophy.
+                      </p>
+                      <div className="flex gap-6">
+                        <Link to={`/project/${project.id}`}>
+                          <button className="px-10 py-4 rounded-full bg-white text-obsidian text-[10px] font-bold tracking-widest uppercase hover:bg-neon-cyan transition-all">
+                            Case Study
+                          </button>
+                        </Link>
+                        <Link to={`/project/${project.id}#gallery`}>
+                          <button className="px-10 py-4 rounded-full border border-white/10 text-white text-[10px] font-bold tracking-widest uppercase hover:bg-white/5 transition-all">
+                            Gallery
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
 
       {/* Ambient Glows */}
       <div className="fixed -top-1/4 -left-1/4 w-1/2 h-1/2 bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="fixed -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-electric-purple/5 rounded-full blur-[150px] pointer-events-none" />
+      
+      <Footer />
     </div>
   );
 };
