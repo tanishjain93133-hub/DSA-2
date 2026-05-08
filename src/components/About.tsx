@@ -57,7 +57,7 @@ export const About: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-8">What is DSA?</h2>
             <p className="text-white/80 text-lg mb-12 leading-relaxed font-light">
               DSA Architects & Interior Design is a creative studio dedicated to designing modern, functional, and elegant spaces. 
-              Founded in 2021 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
+              Founded in 2018 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
             </p>
 
             <Link to="/about">

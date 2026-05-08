@@ -47,7 +47,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-white font-bold tracking-[0.2em] text-[10px] md:text-xs">DSA</span>
-              <span className="text-white/40 tracking-[0.1em] text-[8px] uppercase hidden md:block">Architects & Interiors</span>
+              <span className="text-white/70 tracking-[0.1em] text-[8px] uppercase hidden md:block">Architects & Interiors</span>
             </div>
           </Link>
 

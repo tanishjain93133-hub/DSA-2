@@ -87,10 +87,10 @@ export const Footer: React.FC = () => {
           {/* Right: Copyright */}
           <div className="flex-1 flex justify-end">
             <div className="flex flex-col items-center md:items-end font-display">
-              <p className="text-[10px] tracking-[0.4em] text-white/80 uppercase font-bold text-center md:text-right mb-1">
+              <p className="text-[10px] tracking-[0.4em] text-white/95 uppercase font-bold text-center md:text-right mb-1">
                 © 2026 DSA ARCHITECTS & INTERIORS
               </p>
-              <p className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-bold text-center md:text-right">
+              <p className="text-[10px] tracking-[0.4em] text-white/70 uppercase font-bold text-center md:text-right">
                 ALL RIGHTS RESERVED.
               </p>
             </div>

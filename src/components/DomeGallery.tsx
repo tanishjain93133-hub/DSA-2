@@ -1,36 +1,33 @@
-import React, { useEffect, useMemo, useRef, useCallback, useState } from 'react';
+import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 
 const DEFAULT_IMAGES = [
   {
-    src: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Architecture Modern'
+    src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Abstract art'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Interior Design'
+    src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Modern sculpture'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Kitchen Design'
+    src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Digital artwork'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Modern Living Room'
+    src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Contemporary art'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Architectural Detail'
+    src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Geometric pattern'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Office Space'
+    src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Textured surface'
   },
-  {
-    src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop',
-    alt: 'Penthouse View'
-  }
+  { src: 'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large', alt: 'Social media image' }
 ];
 
 const DEFAULTS = {
@@ -52,7 +49,7 @@ const getDataNumber = (el: HTMLElement, name: string, fallback: number) => {
   return Number.isFinite(n) ? n : fallback;
 };
 
-function buildItems(pool: any[], seg: number) {
+function buildItems(pool: (string | { src: string; alt?: string })[], seg: number) {
   const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
   const evenYs = [-4, -2, 0, 2, 4];
   const oddYs = [-3, -1, 1, 3, 5];
@@ -65,6 +62,11 @@ function buildItems(pool: any[], seg: number) {
   const totalSlots = coords.length;
   if (pool.length === 0) {
     return coords.map(c => ({ ...c, src: '', alt: '' }));
+  }
+  if (pool.length > totalSlots) {
+    console.warn(
+      `[DomeGallery] Provided image count (${pool.length}) exceeds available tiles (${totalSlots}). Some images will not be shown.`
+    );
   }
 
   const normalizedImages = pool.map(image => {
@@ -149,14 +151,14 @@ export default function DomeGallery({
   const viewerRef = useRef<HTMLDivElement>(null);
   const scrimRef = useRef<HTMLDivElement>(null);
   const focusedElRef = useRef<HTMLElement | null>(null);
-  const originalTilePositionRef = useRef<any>(null);
+  const originalTilePositionRef = useRef<{left: number, top: number, width: number, height: number} | null>(null);
 
   const rotationRef = useRef({ x: 0, y: 0 });
   const startRotRef = useRef({ x: 0, y: 0 });
-  const startPosRef = useRef<any>(null);
+  const startPosRef = useRef<{ x: number, y: number } | null>(null);
   const draggingRef = useRef(false);
   const movedRef = useRef(false);
-  const inertiaRAF = useRef<any>(null);
+  const inertiaRAF = useRef<number | null>(null);
   const openingRef = useRef(false);
   const openStartedAtRef = useRef(0);
   const lastDragEndAt = useRef(0);
@@ -176,14 +178,28 @@ export default function DomeGallery({
 
   const items = useMemo(() => buildItems(images, segments), [images, segments]);
 
-  const applyTransform = (xDeg: number, yDeg: number) => {
+  const applyTransform = useCallback((xDeg: number, yDeg: number) => {
     const el = sphereRef.current;
     if (el) {
       el.style.transform = `translateZ(calc(var(--radius) * -1)) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
     }
-  };
+  }, []);
 
-  const lockedRadiusRef = useRef<any>(null);
+  // Auto-rotation effect
+  useEffect(() => {
+    let raf: number;
+    const rotate = () => {
+      if (!draggingRef.current && !openingRef.current && !inertiaRAF.current) {
+        rotationRef.current.y = wrapAngleSigned(rotationRef.current.y + 0.03);
+        applyTransform(rotationRef.current.x, rotationRef.current.y);
+      }
+      raf = requestAnimationFrame(rotate);
+    };
+    raf = requestAnimationFrame(rotate);
+    return () => cancelAnimationFrame(raf);
+  }, [applyTransform]);
+
+  const lockedRadiusRef = useRef<number | null>(null);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -360,7 +376,7 @@ export default function DomeGallery({
         }
       }
     },
-    { target: mainRef, eventOptions: { passive: true } }
+    { target: mainRef as any, eventOptions: { passive: true } }
   );
 
   useEffect(() => {
@@ -373,7 +389,7 @@ export default function DomeGallery({
       const parent = el.parentElement as HTMLElement;
       const overlay = viewerRef.current?.querySelector('.enlarge') as HTMLElement;
       if (!overlay) return;
-      const refDiv = parent.querySelector('.item__image--reference') as HTMLElement;
+      const refDiv = parent.querySelector('.item__image--reference');
       const originalPos = originalTilePositionRef.current;
       if (!originalPos) {
         overlay.remove();
@@ -408,6 +424,7 @@ export default function DomeGallery({
       const originalImg = overlay.querySelector('img');
       if (originalImg) {
         const img = originalImg.cloneNode() as HTMLImageElement;
+        img.referrerPolicy = "no-referrer";
         img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
         animatingOverlay.appendChild(img);
       }
@@ -491,7 +508,7 @@ export default function DomeGallery({
       refDiv.style.transform = `rotateX(${-parentRot.rotateX}deg) rotateY(${-parentRot.rotateY}deg)`;
       parent.appendChild(refDiv);
 
-      void refDiv.offsetHeight;
+      void (refDiv as HTMLElement).offsetHeight;
 
       const tileR = refDiv.getBoundingClientRect();
       const mainR = mainRef.current?.getBoundingClientRect();
@@ -522,13 +539,8 @@ export default function DomeGallery({
       overlay.style.transition = `transform ${enlargeTransitionMs}ms ease, opacity ${enlargeTransitionMs}ms ease`;
       const rawSrc = parent.dataset.src || el.querySelector('img')?.src || '';
       const img = document.createElement('img');
-      img.referrerPolicy = 'no-referrer';
-      img.onerror = () => {
-        if (img.src.includes('lh3.googleusercontent.com/d/')) {
-          img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-        }
-      };
       img.src = rawSrc;
+      img.referrerPolicy = "no-referrer";
       overlay.appendChild(img);
       viewerRef.current!.appendChild(overlay);
       const tx0 = tileR.left - frameR.left;
@@ -552,7 +564,7 @@ export default function DomeGallery({
       if (wantsResize) {
         const onFirstEnd = (ev: TransitionEvent) => {
           if (ev.propertyName !== 'transform') return;
-          overlay.removeEventListener('transitionend', onFirstEnd);
+          overlay.removeEventListener('transitionend', onFirstEnd as any);
           const prevTransition = overlay.style.transition;
           overlay.style.transition = 'none';
           const tempWidth = openedImageWidth || `${frameR.width}px`;
@@ -562,7 +574,7 @@ export default function DomeGallery({
           const newRect = overlay.getBoundingClientRect();
           overlay.style.width = frameR.width + 'px';
           overlay.style.height = frameR.height + 'px';
-          void overlay.offsetWidth;
+          void (overlay as HTMLElement).offsetWidth;
           overlay.style.transition = `left ${enlargeTransitionMs}ms ease, top ${enlargeTransitionMs}ms ease, width ${enlargeTransitionMs}ms ease, height ${enlargeTransitionMs}ms ease`;
           const centeredLeft = frameR.left - mainR.left + (frameR.width - newRect.width) / 2;
           const centeredTop = frameR.top - mainR.top + (frameR.height - newRect.height) / 2;
@@ -578,31 +590,31 @@ export default function DomeGallery({
           };
           overlay.addEventListener('transitionend', cleanupSecond, { once: true });
         };
-        overlay.addEventListener('transitionend', onFirstEnd);
+        overlay.addEventListener('transitionend', onFirstEnd as any);
       }
     },
     [enlargeTransitionMs, lockScroll, openedImageHeight, openedImageWidth, segments, unlockScroll]
   );
 
   const onTileClick = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
+    (e: React.MouseEvent) => {
       if (draggingRef.current) return;
       if (movedRef.current) return;
       if (performance.now() - lastDragEndAt.current < 80) return;
       if (openingRef.current) return;
-      openItemFromElement(e.currentTarget);
+      openItemFromElement(e.currentTarget as HTMLElement);
     },
     [openItemFromElement]
   );
 
   const onTilePointerUp = useCallback(
-    (e: React.PointerEvent<HTMLElement>) => {
+    (e: React.PointerEvent) => {
       if (e.pointerType !== 'touch') return;
       if (draggingRef.current) return;
       if (movedRef.current) return;
       if (performance.now() - lastDragEndAt.current < 80) return;
       if (openingRef.current) return;
-      openItemFromElement(e.currentTarget);
+      openItemFromElement(e.currentTarget as HTMLElement);
     },
     [openItemFromElement]
   );
@@ -618,69 +630,56 @@ export default function DomeGallery({
       ref={rootRef}
       className="sphere-root"
       style={{
-        // @ts-ignore
-        ['--segments-x']: segments,
-        ['--segments-y']: segments,
-        ['--overlay-blur-color']: overlayBlurColor,
-        ['--tile-radius']: imageBorderRadius,
-        ['--enlarge-radius']: openedImageBorderRadius,
-        ['--image-filter']: grayscale ? 'grayscale(1)' : 'none'
+        ['--segments-x' as any]: segments,
+        ['--segments-y' as any]: segments,
+        ['--overlay-blur-color' as any]: overlayBlurColor,
+        ['--tile-radius' as any]: imageBorderRadius,
+        ['--enlarge-radius' as any]: openedImageBorderRadius,
+        ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none'
       }}
     >
       <main ref={mainRef} className="sphere-main">
-        <div className="stage">
+        <div className="dg-stage">
           <div ref={sphereRef} className="sphere">
             {items.map((it, i) => (
               <div
                 key={`${it.x},${it.y},${i}`}
-                className="item"
+                className="dg-item"
                 data-src={it.src}
                 data-offset-x={it.x}
                 data-offset-y={it.y}
                 data-size-x={it.sizeX}
                 data-size-y={it.sizeY}
                 style={{
-                  // @ts-ignore
-                  ['--offset-x']: it.x,
-                  ['--offset-y']: it.y,
-                  ['--item-size-x']: it.sizeX,
-                  ['--item-size-y']: it.sizeY
+                  ['--offset-x' as any]: it.x,
+                  ['--offset-y' as any]: it.y,
+                  ['--item-size-x' as any]: it.sizeX,
+                  ['--item-size-y' as any]: it.sizeY
                 }}
               >
                 <div
-                  className="item__image"
+                  className="dg-item__image"
                   role="button"
                   tabIndex={0}
                   aria-label={it.alt || 'Open image'}
                   onClick={onTileClick}
                   onPointerUp={onTilePointerUp}
                 >
-                  <img 
-                    src={it.src} 
-                    draggable={false} 
-                    alt={it.alt} 
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const img = e.currentTarget;
-                      if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                        img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                      }
-                    }}
-                  />
+                  <img src={it.src} draggable={false} alt={it.alt} referrerPolicy="no-referrer" />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="overlay" />
-        <div className="overlay overlay--blur" />
-        <div className="edge-fade edge-fade--top" />
-        <div className="edge-fade edge-fade--bottom" />
+        <div className="dg-overlay" />
+        <div className="dg-overlay dg-overlay--blur" />
+        <div className="dg-edge-fade dg-edge-fade--top" />
+        <div className="dg-edge-fade dg-edge-fade--bottom" />
 
-        <div className="viewer" ref={viewerRef}>
-          <div ref={scrimRef} className="scrim" />
-          <div ref={frameRef} className="frame" />
+        <div className="dg-viewer" ref={viewerRef}>
+          <div ref={scrimRef} className="dg-scrim" />
+          <div ref={frameRef} className="dg-frame" />
         </div>
       </main>
     </div>

@@ -37,7 +37,7 @@ export const Assembly: React.FC = () => {
             
             <div className="space-y-10 text-white/80 text-base md:text-lg leading-relaxed font-light max-w-xl">
               <p>
-                <strong className="text-white font-medium">DSA Architects & Interior Design</strong> is a creative studio dedicated to designing modern, functional, and elegant spaces. Founded in 2021 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
+                <strong className="text-white font-medium">DSA Architects & Interior Design</strong> is a creative studio dedicated to designing modern, functional, and elegant spaces. Founded in 2018 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
               </p>
               <p>
                 Ar. Dhwanish Shah holds a Bachelor of Architecture degree from <span className="text-white/70">Anant National University</span> and brings a strong foundation of design thinking and innovation to every project.
@@ -101,7 +101,7 @@ export const Assembly: React.FC = () => {
           className="grid grid-cols-2 gap-8 md:gap-32 mt-20 pt-16 border-t border-white/5 text-center max-w-4xl mx-auto"
         >
           <div className="flex flex-col items-center">
-            <p className="text-4xl md:text-6xl font-display font-medium text-white mb-3 tracking-tighter">2021</p>
+            <p className="text-4xl md:text-6xl font-display font-medium text-white mb-3 tracking-tighter">2018</p>
             <p className="text-[10px] md:text-xs tracking-[0.3em] text-white/40 uppercase font-bold leading-relaxed">
               Foundation <span className="text-white/60 block mt-1">DSA Architects</span>
             </p>

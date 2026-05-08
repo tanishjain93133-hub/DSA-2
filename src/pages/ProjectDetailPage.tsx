@@ -26,7 +26,7 @@ const COMMON_GALLERY = [
   { image: 'https://lh3.googleusercontent.com/d/1GHRlkdpuKtOVQ9p2t35-pMhmfu9m8KRM', text: 'Tectonic Light' },
   { image: 'https://lh3.googleusercontent.com/d/1H6q1qNWQHacRX-hMgou8B1FiWhRQChA9', text: 'Minimalist Core' },
   { image: 'https://lh3.googleusercontent.com/d/1QLoxtToMtlmg-ipEwkZmSlumXOUQN8xl', text: 'Spatial Flux' },
-  { image: 'https://lh3.googleusercontent.com/d/1RAbB85Awvx_M7HDpeLTHFHe_hVhD5Ei', text: 'Organic Void' },
+  { image: 'https://lh3.googleusercontent.com/d/1RAbB85Awvx_M7HDwpeLTHFHe_hVhD5Ei', text: 'Organic Void' },
   { image: 'https://lh3.googleusercontent.com/d/1RN58UzcqRVb7YOuGg3ZnHoEAIeCcMHZq', text: 'Architectural Pulse' },
   { image: 'https://lh3.googleusercontent.com/d/1VizU1uLT7de9piaTNGn2dJ3PFC1Bqc9h', text: 'Luminous Boundary' },
   { image: 'https://lh3.googleusercontent.com/d/1iQmVJffURWt36pHSEUDtBVea6DohwNui', text: 'Pure Harmony' },
@@ -75,7 +75,7 @@ const ICONIC_SHYAMAL_GALLERY = [
 
 const SAFAL_COMMERCIAL_GALLERY = [
   { image: 'https://lh3.googleusercontent.com/d/1GqZsuB4FzUy9H9QA2Cnm0_ZPTsVWxnhs', text: 'Safal Commercial 01' },
-  { image: 'https://lh3.googleusercontent.com/d/1RtXXuGl-Y2yJ1L9mskY3IU5xL-e07l1I', text: 'Safal Commercial 02' },
+  { image: 'https://lh3.googleusercontent.com/d/1_BEEwFeRswSl-qmhg6cGM3CSVZBNxitc', text: 'Safal Commercial 02' },
   { image: 'https://lh3.googleusercontent.com/d/1bQaYUlnqM_dPlHGV4XSVuWHgsiwWkvKJ', text: 'Safal Commercial 03' },
   { image: 'https://lh3.googleusercontent.com/d/1eCEPROlLE1VhRxUILd0_nU5a6H64Dafv', text: 'Safal Commercial 04' },
   { image: 'https://lh3.googleusercontent.com/d/1i2Yqp-lSj_-Jjv7UUTPNFJDn0OhmvOr2', text: 'Safal Commercial 05' },

@@ -59,7 +59,7 @@ export const Hero: React.FC = () => {
                 }}
                 className={cn(
                   "text-lg md:text-2xl font-light tracking-wide",
-                  word.toLowerCase() === "timeless" || word.toLowerCase() === "sophistication," ? "text-neon-cyan italic font-medium" : "text-white/70"
+                  word.toLowerCase() === "timeless" || word.toLowerCase() === "sophistication," ? "text-neon-cyan italic font-medium" : "text-white/90"
                 )}
               >
                 {word}
@@ -109,8 +109,8 @@ export const Hero: React.FC = () => {
         transition={{ delay: 2.5, duration: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
-        <span className="text-[9px] tracking-[0.4em] text-white/40 rotate-90 origin-left translate-x-1">Scroll</span>
-        <div className="w-[1px] h-16 bg-gradient-to-b from-white/40 to-transparent" />
+        <span className="text-[9px] tracking-[0.4em] text-white/70 rotate-90 origin-left translate-x-1">Scroll</span>
+        <div className="w-[1px] h-16 bg-gradient-to-b from-white/70 to-transparent" />
       </motion.div>
     </section>
   );

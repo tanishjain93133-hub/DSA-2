@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
-import DomeGallery from '../components/DomeGallery';
 import { Footer } from '../components/Footer';
+import DomeGallery from '../components/DomeGallery';
 import { cn } from '@/src/lib/utils';
 
 import { HomeGallery } from '../components/HomeGallery';
@@ -131,12 +131,12 @@ export const ProjectsPage: React.FC = () => {
                 PROJECTS
               </h1>
               {/* Large Outline Background Text */}
-              <div className="absolute -top-10 -left-6 text-[150px] font-bold opacity-[0.03] select-none pointer-events-none text-white whitespace-nowrap">
+              <div className="absolute -top-10 -left-6 text-[150px] font-bold opacity-[0.05] select-none pointer-events-none text-white whitespace-nowrap">
                 PROJECTS
               </div>
             </div>
             
-            <p className="text-white/50 text-base md:text-lg max-w-md leading-relaxed font-light mb-12 border-l border-white/10 pl-8">
+            <p className="text-white/80 text-base md:text-lg max-w-md leading-relaxed font-light mb-12 border-l border-white/10 pl-8">
               A collection of architectural narratives that redefine modern living through 
               timeless aesthetics and meticulous spatial planning.
             </p>
@@ -153,17 +153,38 @@ export const ProjectsPage: React.FC = () => {
               </Link>
               <div className="flex items-center gap-4 group cursor-pointer">
                 <div className="w-12 h-[1px] bg-white/20 group-hover:w-20 transition-all duration-500" />
-                <span className="text-[10px] font-bold tracking-[0.3em] text-white/60 uppercase group-hover:text-white transition-colors">Discover</span>
+                <span className="text-[10px] font-bold tracking-[0.3em] text-white/90 uppercase group-hover:text-white transition-colors">Discover</span>
               </div>
             </div>
 
-            {/* Straight Social Links */}
-            <div className="flex items-center gap-8 text-[10px] tracking-[0.3em] font-bold uppercase text-white/30">
-              <a href="https://www.instagram.com/dsa.architects.and.interiors" target="_blank" rel="noopener noreferrer" className="hover:text-neon-cyan transition-colors">Instagram</a>
-              <span className="w-8 h-[1px] bg-white/10" />
-              <a href="#" className="hover:text-neon-cyan transition-colors">Facebook</a>
-              <span className="w-8 h-[1px] bg-white/10" />
-              <a href="#" className="hover:text-neon-cyan transition-colors">Pinterest</a>
+            {/* High-End Social Links */}
+            <div className="flex items-center gap-10 text-[11px] tracking-[0.4em] font-bold uppercase">
+              <a 
+                href="https://www.instagram.com/dsa.architects.and.interiors" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white/80 hover:text-white transition-all duration-500 hover:scale-105"
+              >
+                Instagram
+              </a>
+              <span className="w-10 h-[1px] bg-white/10" />
+              <a 
+                href="https://www.facebook.com/dsa.architects.and.interiors" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white/80 hover:text-white transition-all duration-500 hover:scale-105"
+              >
+                Facebook
+              </a>
+              <span className="w-10 h-[1px] bg-white/10" />
+              <a 
+                href="https://in.pinterest.com/DSAARCHITECTSAHMEDABAD/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white/80 hover:text-white transition-all duration-500 hover:scale-105"
+              >
+                Pinterest
+              </a>
             </div>
           </motion.div>
         </div>
@@ -221,13 +242,13 @@ export const ProjectsPage: React.FC = () => {
           transition={{ delay: 2, duration: 1 }}
           className="absolute bottom-10 right-10 flex items-center gap-6"
         >
-          <span className="text-[9px] tracking-[0.5em] text-white/40 uppercase">Architecture Hero 02</span>
+          <span className="text-[9px] tracking-[0.5em] text-white/70 uppercase">Architecture Hero 02</span>
           <div className="w-16 h-[1px] bg-white/20" />
         </motion.div>
       </section>
 
       {/* Filter Section - High Energy Cinematic Style */}
-      <section className="bg-black pt-20 pb-8 border-b border-white/5 relative overflow-hidden">
+      <section className="bg-black pt-16 pb-6 border-b border-white/5 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neon-cyan/20 rounded-full blur-[120px] animate-pulse" />
@@ -238,9 +259,9 @@ export const ProjectsPage: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="text-center mb-0"
+            className="text-center mb-8"
           >
-            <span className="text-neon-cyan text-[10px] font-black tracking-[1em] uppercase block mb-4">Discovery</span>
+            <span className="text-neon-cyan text-[10px] font-black tracking-[1em] uppercase block mb-3">Discovery</span>
             <h2 className="text-white text-3xl md:text-5xl font-display font-thin tracking-widest uppercase">
               Project <span className="text-gradient font-bold italic">Spheres</span>
             </h2>
@@ -258,10 +279,16 @@ export const ProjectsPage: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                whileHover={{ y: -10 }}
-                onClick={() => setActiveFilter(cat.name)}
+                whileHover={{ y: -5 }}
+                onClick={() => {
+                  setActiveFilter(cat.name);
+                  const element = document.getElementById('project-results');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
                 className={cn(
-                  "relative h-[350px] rounded-3xl transition-all duration-700 overflow-hidden text-left group",
+                  "relative h-[220px] rounded-3xl transition-all duration-700 overflow-hidden text-left group",
                   activeFilter === cat.name 
                     ? "ring-2 ring-neon-cyan ring-offset-4 ring-offset-black shadow-[0_0_50px_rgba(30,227,249,0.3)]" 
                     : "ring-1 ring-white/10 opacity-70 hover:opacity-100"
@@ -296,7 +323,7 @@ export const ProjectsPage: React.FC = () => {
                   >
                     <span className={cn(
                       "text-[9px] font-black tracking-[0.4em] uppercase transition-all",
-                      activeFilter === cat.name ? "text-neon-cyan" : "text-white/40"
+                      activeFilter === cat.name ? "text-neon-cyan" : "text-white/70"
                     )}>
                       {cat.type} 0{idx + 1}
                     </span>
@@ -335,19 +362,17 @@ export const ProjectsPage: React.FC = () => {
         </div>
       </section>
 
+      <div id="project-results" className="scroll-mt-24" />
+      
       <AnimatePresence mode="wait">
         {activeFilter === 'Other' ? (
           <motion.section 
             key="dome-gallery"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="relative h-[85vh] w-full bg-[#050505] overflow-hidden border-y border-white/5"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: '100vh' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="relative w-full bg-black overflow-hidden"
           >
-            <div className="absolute top-16 left-1/2 -translate-x-1/2 z-10 text-center">
-               <span className="text-neon-cyan text-[10px] font-black tracking-[1em] uppercase block mb-2">Immersive Experience</span>
-               <h3 className="text-white text-2xl font-display font-thin tracking-widest uppercase">Conceptual Archive</h3>
-            </div>
             <DomeGallery 
               images={[
                 'https://lh3.googleusercontent.com/d/1XibxVzxzjgvmI85XDUywtUpJTUus7bzM',
@@ -363,75 +388,76 @@ export const ProjectsPage: React.FC = () => {
                 'https://lh3.googleusercontent.com/d/11TbTFOKmmDw5GgkEcUPklEkQgWW9u06Z',
                 'https://lh3.googleusercontent.com/d/1GqZsuB4FzUy9H9QA2Cnm0_ZPTsVWxnhs',
               ]}
-              fit={0.6}
+              fit={0.9}
+              fitBasis="height"
+              padFactor={0.02}
+              minRadius={600}
+              maxVerticalRotationDeg={5}
+              segments={35}
               grayscale={false}
-              overlayBlurColor="#050505"
-              openedImageWidth="80vw"
-              openedImageHeight="80vh"
+              overlayBlurColor="#000000"
+              openedImageWidth="min(800px, 80vw)"
+              openedImageHeight="min(500px, 60vh)"
+              imageBorderRadius="40px"
             />
           </motion.section>
         ) : (
-          <motion.section 
-            key="list-gallery"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="relative z-20 px-6 py-20 bg-obsidian/40 backdrop-blur-3xl border-y border-white/5"
+          <section 
+            className="relative z-20 px-6 py-16 bg-obsidian/40 backdrop-blur-3xl border-y border-white/5"
           >
-            <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col gap-20">
-                {filteredProjects.map((project, i) => (
-                  <motion.div 
-                    key={project.id}
-                    layout
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: i * 0.1 }}
-                    className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
-                  >
-                    <div className="w-full md:w-1/2 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 group relative">
-                      <img 
-                        src={project.src} 
-                        alt={project.alt} 
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover object-top transition-all duration-1000 hover:scale-110"
-                        referrerPolicy="no-referrer"
-                        onError={(e) => {
-                          const img = e.currentTarget;
-                          if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                            img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                          }
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
-                    <div className="w-full md:w-1/2 flex flex-col gap-8">
-                      <span className="text-neon-cyan text-[11px] font-bold tracking-[0.5em] uppercase">Featured Case Study</span>
-                      <h3 className="text-4xl md:text-6xl font-display font-thin text-white tracking-tight">{project.alt}</h3>
-                      <p className="text-white/40 text-base leading-relaxed max-w-md font-light">
-                        Redefining contemporary living through an uncompromising commitment to structural integrity and spatial harmony. This project stands as a testament to the DSA design philosophy.
-                      </p>
-                      <div className="flex gap-6">
-                        <Link to={`/project/${project.id}`}>
-                          <button className="px-10 py-4 rounded-full bg-white text-obsidian text-[10px] font-bold tracking-widest uppercase hover:bg-neon-cyan transition-all">
-                            Case Study
-                          </button>
-                        </Link>
-                        <Link to={`/project/${project.id}#gallery`}>
-                          <button className="px-10 py-4 rounded-full border border-white/10 text-white text-[10px] font-bold tracking-widest uppercase hover:bg-white/5 transition-all">
-                            Gallery
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col gap-32">
+            {filteredProjects.map((project, i) => (
+              <motion.div 
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: i * 0.1 }}
+                className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
+              >
+                <div className="w-full md:w-1/2 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 group relative">
+                  <img 
+                    src={project.src} 
+                    alt={project.alt} 
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top transition-all duration-1000 hover:scale-110"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      if (img.src.includes('lh3.googleusercontent.com/d/')) {
+                        img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <div className="w-full md:w-1/2 flex flex-col gap-8">
+                  <span className="text-neon-cyan text-[11px] font-bold tracking-[0.5em] uppercase">Project Discovery</span>
+                  <h3 className="text-4xl md:text-6xl font-display font-thin text-white tracking-tight">{project.alt}</h3>
+                  <p className="text-white/70 text-base leading-relaxed max-w-md font-light">
+                    Redefining contemporary living through an uncompromising commitment to structural integrity and spatial harmony. This project stands as a testament to the DSA design philosophy.
+                  </p>
+                  <div className="flex gap-6">
+                    <Link to={`/project/${project.id}`}>
+                      <button className="px-10 py-4 rounded-full bg-white text-obsidian text-[10px] font-bold tracking-widest uppercase hover:bg-neon-cyan transition-all">
+                        Case Study
+                      </button>
+                    </Link>
+                    <Link to={`/project/${project.id}#gallery`}>
+                      <button className="px-10 py-4 rounded-full border border-white/10 text-white text-[10px] font-bold tracking-widest uppercase hover:bg-white/5 transition-all">
+                        Gallery
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
         )}
       </AnimatePresence>
 

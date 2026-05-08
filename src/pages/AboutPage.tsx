@@ -64,7 +64,7 @@ export const AboutPage: React.FC = () => {
                 <span className="text-neon-cyan text-[10px] font-bold tracking-[1em] uppercase font-mono">
                    About
                 </span>
-                <span className="text-white/40 text-4xl font-extralight tracking-tighter uppercase">Studio</span>
+                <span className="text-white/70 text-4xl font-extralight tracking-tighter uppercase">Studio</span>
               </motion.div>
 
               {/* DSA Headline - Central and Small */}
@@ -80,7 +80,7 @@ export const AboutPage: React.FC = () => {
               
               {/* Optional Right Accoutrement to balance */}
               <div className="hidden md:block text-right">
-                 <span className="text-white/40 text-[10px] font-mono tracking-widest uppercase">Est. 2021</span>
+                 <span className="text-white/70 text-[10px] font-mono tracking-widest uppercase">Est. 2018</span>
               </div>
             </div>
 
@@ -98,7 +98,7 @@ export const AboutPage: React.FC = () => {
                   </p>
                   <div className="w-20 h-[1px] bg-white/20 mb-8" />
                   <p className="text-white/80 text-xl font-light leading-relaxed">
-                    Founded in 2021 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
+                    Founded in 2018 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
                   </p>
                 </motion.div>
                 
@@ -144,7 +144,7 @@ export const AboutPage: React.FC = () => {
               >
                 <div>
                   <h4 className="text-neon-cyan text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Established</h4>
-                  <p className="text-white text-2xl font-light">October 2021</p>
+                  <p className="text-white text-2xl font-light">October 2018</p>
                 </div>
                 <div>
                   <h4 className="text-neon-cyan text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Specialization</h4>
@@ -162,7 +162,7 @@ export const AboutPage: React.FC = () => {
                    <div className="w-16 h-16 rounded-2xl glass border border-neon-cyan/20 flex items-center justify-center group overflow-hidden">
                       <div className="w-3 h-3 rounded-full bg-neon-cyan animate-pulse group-hover:scale-150 transition-transform" />
                    </div>
-                   <p className="text-[10px] text-white/60 uppercase tracking-[0.4em] mt-6 font-bold">Studio Status</p>
+                   <p className="text-[10px] text-white/90 uppercase tracking-[0.4em] mt-6 font-bold">Studio Status</p>
                 </div>
               </motion.div>
             </div>
