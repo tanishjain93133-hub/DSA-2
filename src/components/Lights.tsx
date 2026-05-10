@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-
+import { SafeImage } from './SafeImage';
 import MagicBento, { BentoCardData } from './MagicBento';
 
 const lightingFeatures: BentoCardData[] = [
@@ -62,19 +62,12 @@ export const Lights: React.FC = () => {
                 className="aspect-square rounded-3xl overflow-hidden border border-white/10 glass p-2 group"
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                  <img
+                  <SafeImage
                     src={feature.image}
                     alt={feature.title}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const img = e.currentTarget;
-                      if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                        img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                      }
-                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>

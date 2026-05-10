@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { WireframeAssembly } from './WireframeAssembly';
 import { cn } from '@/src/lib/utils';
 
+import { SafeImage } from './SafeImage';
+
 export const Hero: React.FC = () => {
   const tagline = "Designing architecture & interiors with timeless sophistication, and meticulous care | Pan India.";
   const words = tagline.split(" ");
@@ -92,11 +94,10 @@ export const Hero: React.FC = () => {
           transition={{ duration: 3, ease: "easeOut" }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full pointer-events-none"
         >
-          <img 
+          <SafeImage 
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
             alt="Modern Architectural Render" 
             className="w-full h-full object-cover grayscale opacity-100"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         </motion.div>

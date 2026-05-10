@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './ChromaGrid.css';
 
+import { SafeImage } from './SafeImage';
+
 interface ChromaItem {
   image: string;
   title: string;
@@ -180,7 +182,11 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
           }}
         >
           <div className="chroma-img-wrapper">
-            <img src={c.image} alt={c.title} loading="lazy" referrerPolicy="no-referrer" />
+            <SafeImage 
+              src={c.image} 
+              alt={c.title} 
+              loading="lazy" 
+            />
           </div>
           <footer className="chroma-info">
             <h3 className="name">{c.title}</h3>

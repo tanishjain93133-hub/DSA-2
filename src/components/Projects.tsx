@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ScrollVelocity } from './ScrollVelocity';
 import Stack from './Stack';
 import CountUp from './CountUp';
+import { SafeImage } from './SafeImage';
 
 const industryExpertise = [
   "Designer", "Client", "Electrician", "Plumber", "Contractor", 
@@ -33,19 +34,12 @@ const stackImages = [
 export const Projects: React.FC = () => {
   const memoizedCards = React.useMemo(() => stackImages.map((src, i) => (
     <div key={i} className="w-full h-full relative p-2">
-      <img 
+      <SafeImage 
         src={src} 
         alt={`card-${i + 1}`} 
         loading="lazy"
         decoding="async"
         className="w-full h-full object-cover rounded-[2rem] border border-white/10 shadow-xl"
-        referrerPolicy="no-referrer"
-        onError={(e) => {
-          const img = e.currentTarget;
-          if (img.src.includes('lh3.googleusercontent.com/d/')) {
-            img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-          }
-        }}
       />
       <div className="absolute inset-2 rounded-[2rem] bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
     </div>

@@ -7,6 +7,8 @@ const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = '132, 0, 255'; // Purple
 const MOBILE_BREAKPOINT = 768;
 
+import { SafeImage } from './SafeImage';
+
 export interface BentoCardData {
   color?: string;
   title: string;
@@ -518,11 +520,10 @@ const MagicBento: React.FC<MagicBentoProps> = ({
             >
               {card.image && (
                 <div className="absolute inset-0 z-0">
-                  <img 
+                  <SafeImage 
                     src={card.image} 
                     alt={card.title} 
                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" 
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
                 </div>

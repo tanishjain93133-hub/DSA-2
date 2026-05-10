@@ -7,6 +7,7 @@ import { LayoutGrid, Palette, ShieldCheck, Award, Users, Lightbulb } from 'lucid
 import { Assembly } from '../components/Assembly';
 import { ChromaGrid } from '../components/ChromaGrid';
 import { cn } from '@/src/lib/utils';
+import { SafeImage } from '../components/SafeImage';
 
 export const AboutPage: React.FC = () => {
   useEffect(() => {
@@ -40,11 +41,10 @@ export const AboutPage: React.FC = () => {
       </div>
 
       <div className="fixed inset-0 z-0">
-        <img 
+        <SafeImage 
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
           alt="Architectural Backdrop" 
           className="w-full h-full object-cover opacity-20 grayscale brightness-50"
-          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
       </div>

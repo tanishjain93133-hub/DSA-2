@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import Stepper, { Step } from './Stepper';
+import { SafeImage } from './SafeImage';
 
 interface InquireModalProps {
   isOpen: boolean;
@@ -59,11 +60,10 @@ export const InquireModal: React.FC<InquireModalProps> = ({ isOpen, onClose }) =
                     Ready to design your <span className="text-neon-cyan">dream home</span> with DSA?
                   </h2>
                   <div className="w-full max-h-[160px] aspect-[2.5/1] rounded-2xl overflow-hidden mb-3 border border-white/10 shadow-2xl bg-white/5 relative group">
-                    <img 
+                    <SafeImage 
                       src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop" 
                       alt="Dream Home" 
                       className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                      referrerPolicy="no-referrer"
                     />
                   </div>
                   <p className="text-white/40 font-medium tracking-widest text-[10px] uppercase mb-4">

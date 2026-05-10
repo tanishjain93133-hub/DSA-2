@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import DecryptedText from './DecryptedText';
+import { SafeImage } from './SafeImage';
 
 export const Workspace: React.FC = () => {
   return (
@@ -34,11 +35,10 @@ export const Workspace: React.FC = () => {
         >
           {/* India Map Geographic Background - User Provided Asset */}
           <div className="absolute inset-0 z-0">
-            <img 
+            <SafeImage 
               src="https://lh3.googleusercontent.com/d/1ft_-zjeWMB82uilC6_wYiod1j6qJ9zIU" 
               alt="Geographic Map of Ahmedabad" 
               className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"
-              referrerPolicy="no-referrer"
             />
             {/* Overlay Grid - Subtler */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.01)_1px,transparent_1px)] bg-[size:60px_60px] opacity-10" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Instagram, Facebook, Linkedin } from 'lucide-react';
+import { SafeImage } from './SafeImage';
 
 // Custom Pinterest Icon since Lucide doesn't have one
 const PinterestIcon = ({ className }: { className?: string }) => (
@@ -25,11 +26,10 @@ export const Footer: React.FC = () => {
               viewport={{ once: true }}
               className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-white/10 overflow-hidden flex items-center justify-center p-0 bg-transparent shadow-2xl"
             >
-              <img 
+              <SafeImage 
                 src="https://lh3.googleusercontent.com/d/1DkbTUmi2LgvJdzeMNlrNJw159FzlwrAD" 
                 alt="DSA Architects Logo" 
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </motion.div>
           </div>

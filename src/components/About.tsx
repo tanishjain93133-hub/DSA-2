@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { LayoutGrid, Palette, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SafeImage } from './SafeImage';
 import { cn } from '@/src/lib/utils';
 
 export const About: React.FC = () => {
@@ -34,17 +35,10 @@ export const About: React.FC = () => {
             className="relative"
           >
             <div className="aspect-square rounded-3xl overflow-hidden border border-white/10 glass p-4">
-              <img
+              <SafeImage
                 src="https://lh3.googleusercontent.com/d/1zIowbroWdab39MHVjBfVN_nqJFCpVJv7"
                 alt="DSA Architectural Studio"
                 className="w-full h-full object-cover rounded-2xl"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  const img = e.currentTarget;
-                  if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                    img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                  }
-                }}
               />
             </div>
           </motion.div>

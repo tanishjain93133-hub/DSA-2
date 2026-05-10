@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'motion/react';
+import { SafeImage } from './SafeImage';
 import './Stack.css';
 
 interface CardRotateProps {
@@ -96,7 +97,7 @@ export default function Stack({
         {
           id: 1,
           content: (
-            <img
+            <SafeImage
               src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format"
               alt="card-1"
               className="card-image"
@@ -106,7 +107,7 @@ export default function Stack({
         {
           id: 2,
           content: (
-            <img
+            <SafeImage
               src="https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format"
               alt="card-2"
               className="card-image"
@@ -116,7 +117,7 @@ export default function Stack({
         {
           id: 3,
           content: (
-            <img
+            <SafeImage
               src="https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format"
               alt="card-3"
               className="card-image"
@@ -126,7 +127,7 @@ export default function Stack({
         {
           id: 4,
           content: (
-            <img
+            <SafeImage
               src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format"
               alt="card-4"
               className="card-image"

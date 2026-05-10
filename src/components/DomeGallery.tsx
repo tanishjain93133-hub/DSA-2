@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
+import { SafeImage } from './SafeImage';
 import './DomeGallery.css';
 
 const DEFAULT_IMAGES = [
@@ -665,7 +666,11 @@ export default function DomeGallery({
                   onClick={onTileClick}
                   onPointerUp={onTilePointerUp}
                 >
-                  <img src={it.src} draggable={false} alt={it.alt} referrerPolicy="no-referrer" />
+                  <SafeImage 
+                    src={it.src} 
+                    draggable={false} 
+                    alt={it.alt} 
+                  />
                 </div>
               </div>
             ))}

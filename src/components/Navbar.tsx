@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
-
 import { Link, useLocation } from 'react-router-dom';
+import { SafeImage } from './SafeImage';
 import { InquireModal } from './InquireModal';
 
 export const Navbar: React.FC = () => {
@@ -38,11 +38,10 @@ export const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center gap-4 group">
             <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 overflow-hidden bg-black/40 backdrop-blur-md group-hover:border-neon-cyan transition-colors">
-              <img 
+              <SafeImage 
                 src="https://lh3.googleusercontent.com/d/1DkbTUmi2LgvJdzeMNlrNJw159FzlwrAD" 
                 alt="DSA Logo" 
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </div>
             <div className="flex flex-col">

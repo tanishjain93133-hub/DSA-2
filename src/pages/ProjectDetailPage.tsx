@@ -6,6 +6,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import CircularGallery from '../components/CircularGallery';
 import { cn } from '../lib/utils';
+import { SafeImage } from '../components/SafeImage';
 
 const ACHIRA_GALLERY = [
   { image: 'https://lh3.googleusercontent.com/d/1lT_rM9G9pB9t4vHywDCfQy7h5OHwJM41', text: 'Achira 01' },
@@ -513,11 +514,10 @@ export const ProjectDetailPage: React.FC = () => {
               transition={{ duration: 1, delay: 0.2 }}
               className="aspect-square rounded-3xl overflow-hidden glass border border-white/10"
             >
-              <img 
+              <SafeImage 
                 src={project.galleryItems[0].image} 
                 alt={project.title} 
                 loading="lazy"
-                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
             </motion.div>
@@ -580,12 +580,11 @@ export const ProjectDetailPage: React.FC = () => {
                          className="aspect-[4/5] rounded-2xl overflow-hidden bg-white/5 border border-white/10 cursor-pointer group relative shadow-2xl"
                          onClick={() => setSelectedImage(item.image)}
                        >
-                         <img 
+                         <SafeImage 
                            src={item.image} 
                            alt={item.text}
                            loading="lazy"
                            className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110 brightness-75 group-hover:brightness-100"
-                           referrerPolicy="no-referrer"
                          />
                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
                             <span className="text-white text-[10px] font-bold tracking-widest uppercase mb-1">{item.text}</span>
@@ -637,11 +636,10 @@ export const ProjectDetailPage: React.FC = () => {
                 className="relative w-full h-full flex items-center justify-center pointer-events-none"
                 onClick={(e) => e.stopPropagation()}
               >
-                <img 
-                  src={selectedImage} 
-                  alt="Spatial View"
-                  className="max-w-[90vw] max-h-[80vh] md:max-w-7xl md:max-h-[85vh] object-contain rounded-xl shadow-[0_0_100px_rgba(0,255,255,0.15)] border border-white/10 pointer-events-auto"
-                  referrerPolicy="no-referrer"
+                <SafeImage 
+                   src={selectedImage} 
+                   alt="Spatial View"
+                   className="max-w-[90vw] max-h-[80vh] md:max-w-7xl md:max-h-[85vh] object-contain rounded-xl shadow-[0_0_100px_rgba(0,255,255,0.15)] border border-white/10 pointer-events-auto"
                 />
               </motion.div>
             </motion.div>

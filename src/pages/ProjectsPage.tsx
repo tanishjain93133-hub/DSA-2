@@ -6,6 +6,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import DomeGallery from '../components/DomeGallery';
 import { cn } from '@/src/lib/utils';
+import { SafeImage } from '../components/SafeImage';
 
 import { HomeGallery } from '../components/HomeGallery';
 
@@ -211,19 +212,12 @@ export const ProjectsPage: React.FC = () => {
             transition={{ duration: 2, ease: "easeOut" }}
             className="w-full h-full"
           >
-            <img 
+            <SafeImage 
               src="https://lh3.googleusercontent.com/d/151kmI4LQypjKjzhQatTQCO-aAXyGuBhE" 
               alt="Architectural Masterpiece" 
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s]"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                const img = e.currentTarget;
-                if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                  img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                }
-              }}
             />
             {/* Glossy Overlay */}
             <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#050505]" />
@@ -240,11 +234,10 @@ export const ProjectsPage: React.FC = () => {
 
         {/* Mobile View Background Image (Overlay) */}
         <div className="lg:hidden absolute inset-0 -z-10 opacity-30">
-          <img 
+          <SafeImage 
             src="https://lh3.googleusercontent.com/d/151kmI4LQypjKjzhQatTQCO-aAXyGuBhE" 
             alt="Mobile Bg" 
             className="w-full h-full object-cover grayscale"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
         </div>
@@ -309,19 +302,12 @@ export const ProjectsPage: React.FC = () => {
                 )}
               >
                 {/* Background Image with Layered Overlays */}
-                <img 
+                <SafeImage 
                    src={cat.img} 
                    alt={cat.name} 
                    loading="lazy"
                    decoding="async"
                    className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110"
-                   referrerPolicy="no-referrer"
-                   onError={(e) => {
-                     const img = e.currentTarget;
-                     if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                       img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                     }
-                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className={cn(
@@ -431,19 +417,12 @@ export const ProjectsPage: React.FC = () => {
                 className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}
               >
                 <div className="w-full md:w-1/2 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 group relative">
-                  <img 
+                  <SafeImage 
                     src={project.src} 
                     alt={project.alt} 
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover object-top transition-all duration-1000 hover:scale-110"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const img = e.currentTarget;
-                      if (img.src.includes('lh3.googleusercontent.com/d/')) {
-                        img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-                      }
-                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
