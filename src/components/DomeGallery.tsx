@@ -143,7 +143,7 @@ export default function DomeGallery({
   openedImageHeight = '350px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
-  grayscale = true
+  grayscale = false
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -542,6 +542,19 @@ export default function DomeGallery({
       const img = document.createElement('img');
       img.src = rawSrc;
       img.referrerPolicy = "no-referrer";
+      
+      const handleImgError = () => {
+        const id = img.src.split('/').pop()?.split('?')[0];
+        if (!id) return;
+        if (!img.dataset.retryCount) img.dataset.retryCount = '0';
+        const retryCount = parseInt(img.dataset.retryCount, 10);
+        if (retryCount < 2) {
+          img.dataset.retryCount = (retryCount + 1).toString();
+          img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
+        }
+      };
+      
+      img.onerror = handleImgError;
       overlay.appendChild(img);
       viewerRef.current!.appendChild(overlay);
       const tx0 = tileR.left - frameR.left;
@@ -670,6 +683,7 @@ export default function DomeGallery({
                     src={it.src} 
                     draggable={false} 
                     alt={it.alt} 
+                    size="small"
                   />
                 </div>
               </div>

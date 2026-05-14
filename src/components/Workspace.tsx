@@ -5,7 +5,7 @@ import { SafeImage } from './SafeImage';
 
 export const Workspace: React.FC = () => {
   return (
-    <section id="workspace" className="pt-0 pb-8 bg-[#050505] relative overflow-hidden">
+    <section id="workspace" className="pt-0 pb-0 bg-[#050505] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         {/* Headline Section */}
         <motion.div
@@ -13,7 +13,7 @@ export const Workspace: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="mb-16 md:mb-24 text-center"
+          className="mb-8 md:mb-12 text-center"
         >
           <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-extralight tracking-tight text-white leading-none">
             <DecryptedText 
@@ -36,7 +36,7 @@ export const Workspace: React.FC = () => {
           {/* India Map Geographic Background - User Provided Asset */}
           <div className="absolute inset-0 z-0">
             <SafeImage 
-              src="https://lh3.googleusercontent.com/d/1ft_-zjeWMB82uilC6_wYiod1j6qJ9zIU" 
+              src="https://lh3.googleusercontent.com/d/1v43npXG3_pKwSJQqEZljlY__493jP83m" 
               alt="Geographic Map of Ahmedabad" 
               className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"
             />
@@ -69,19 +69,7 @@ export const Workspace: React.FC = () => {
               </div>
             </div>
             
-            <div className="flex flex-col items-end gap-6 border-l border-white/10 pl-10">
-              <div className="text-right">
-                <p className="text-sm tracking-[0.2em] text-white/60 uppercase font-bold mb-2">Cinematic Map Zoom</p>
-                <div className="text-xs md:text-sm text-[#3B82F6] flex items-center gap-2">
-                  Experience the Journey
-                  <span className="font-mono">23.0125° N, 72.5610° E</span>
-                </div>
-              </div>
-              <div className="hidden md:block h-[1px] w-20 bg-white/10" />
-              <div className="text-right">
-                <p className="text-[10px] tracking-widest text-white/40 uppercase font-bold">Ahmedabad, Gujarat, India</p>
-              </div>
-            </div>
+            {/* Removed Cinematic Map Zoom and Coordinates */}
           </div>
         </motion.div>
 

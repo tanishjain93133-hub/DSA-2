@@ -10,10 +10,12 @@ import { Workspace } from './components/Workspace';
 import { Lights } from './components/Lights';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { Testimonials } from './components/Testimonials';
 import { NebulaBackground } from './components/NebulaBackground';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
+import { AnchorHousePage } from './pages/AnchorHousePage';
 
 import { HomeGallery } from './components/HomeGallery';
 
@@ -25,6 +27,7 @@ const HomePage: React.FC = () => (
       <Hero />
       <About />
       <Projects />
+      <Testimonials />
       <Services />
       <Assembly />
       <Lights />
@@ -44,6 +47,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/portfolio" element={<ProjectsPage />} />
           <Route path="/project/:id" element={<ProjectDetailPage />} />
+          <Route path="/anchor-house" element={<AnchorHousePage />} />
         </Routes>
       </div>
     </Router>

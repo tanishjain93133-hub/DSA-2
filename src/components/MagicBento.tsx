@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
 import './MagicBento.css';
 
-const DEFAULT_PARTICLE_COUNT = 12;
-const DEFAULT_SPOTLIGHT_RADIUS = 300;
+const DEFAULT_PARTICLE_COUNT = 15;
+const DEFAULT_SPOTLIGHT_RADIUS = 350;
 const DEFAULT_GLOW_COLOR = '132, 0, 255'; // Purple
 const MOBILE_BREAKPOINT = 768;
 
@@ -39,11 +39,11 @@ const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR)
   el.className = 'particle';
   el.style.cssText = `
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
-    background: rgba(${color}, 1);
-    box-shadow: 0 0 6px rgba(${color}, 0.6);
+    background: rgba(${color}, 0.8);
+    box-shadow: 0 0 4px rgba(${color}, 0.4);
     pointer-events: none;
     z-index: 100;
     left: ${x}px;
@@ -53,18 +53,22 @@ const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR)
 };
 
 const calculateSpotlightValues = (radius: number) => ({
-  proximity: radius * 0.5,
-  fadeDistance: radius * 0.75
+  proximity: radius * 0.4,
+  fadeDistance: radius * 0.6
 });
 
 const updateCardGlowProperties = (card: HTMLElement, mouseX: number, mouseY: number, glow: number, radius: number) => {
+  if (glow <= 0.05) {
+    card.style.setProperty('--glow-intensity', '0');
+    return;
+  }
   const rect = card.getBoundingClientRect();
   const relativeX = ((mouseX - rect.left) / rect.width) * 100;
   const relativeY = ((mouseY - rect.top) / rect.height) * 100;
 
   card.style.setProperty('--glow-x', `${relativeX}%`);
   card.style.setProperty('--glow-y', `${relativeY}%`);
-  card.style.setProperty('--glow-intensity', glow.toString());
+  card.style.setProperty('--glow-intensity', glow.toFixed(2));
   card.style.setProperty('--glow-radius', `${radius}px`);
 };
 
@@ -174,6 +178,7 @@ const ParticleCard: React.FC<ParticleCardProps> = ({
     const element = cardRef.current;
 
     const handleMouseEnter = () => {
+      if (window.innerWidth <= MOBILE_BREAKPOINT) return;
       isHoveredRef.current = true;
       animateParticles();
 
@@ -212,6 +217,7 @@ const ParticleCard: React.FC<ParticleCardProps> = ({
     };
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth <= MOBILE_BREAKPOINT) return;
       if (!enableTilt && !enableMagnetism) return;
 
       const rect = element.getBoundingClientRect();

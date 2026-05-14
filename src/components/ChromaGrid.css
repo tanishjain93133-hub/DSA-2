@@ -7,7 +7,7 @@
   grid-auto-rows: auto;
   justify-content: center;
   gap: 3rem;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
@@ -66,11 +66,12 @@
 .chroma-img-wrapper {
   position: relative;
   z-index: 1;
-  height: 420px;
+  height: 320px;
   padding: 10px;
   box-sizing: border-box;
   background: transparent;
   transition: background 0.3s ease;
+  overflow: hidden;
 }
 
 .chroma-img-wrapper img {
@@ -106,8 +107,8 @@
   inset: 0;
   pointer-events: none;
   z-index: 3;
-  backdrop-filter: grayscale(0.2) brightness(0.95);
-  -webkit-backdrop-filter: grayscale(0.2) brightness(0.95);
+  backdrop-filter: brightness(0.95);
+  -webkit-backdrop-filter: brightness(0.95);
   background: rgba(0, 0, 0, 0.001);
 
   mask-image: radial-gradient(
@@ -139,8 +140,8 @@
   inset: 0;
   pointer-events: none;
   z-index: 4;
-  backdrop-filter: grayscale(0.2) brightness(0.95);
-  -webkit-backdrop-filter: grayscale(0.2) brightness(0.95);
+  backdrop-filter: brightness(0.95);
+  -webkit-backdrop-filter: brightness(0.95);
   background: rgba(0, 0, 0, 0.001);
 
   mask-image: radial-gradient(

@@ -44,7 +44,7 @@ const lightingFeatures: BentoCardData[] = [
 
 export const Lights: React.FC = () => {
   return (
-    <section id="lights" className="py-24 relative overflow-hidden bg-black">
+    <section id="lights" className="py-8 relative overflow-hidden bg-black">
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-electric-purple/10 blur-[180px] rounded-full pointer-events-none" />
 
@@ -82,10 +82,10 @@ export const Lights: React.FC = () => {
             viewport={{ once: true }}
             className="order-1 lg:order-2 self-start pt-4"
           >
-            <span className="text-neon-cyan text-[10px] font-bold tracking-[0.6em] uppercase block opacity-60 mb-6">
+            <span className="text-neon-cyan text-lg font-bold tracking-[0.6em] uppercase block mb-6">
               The Heritage
             </span>
-            <h2 className="text-4xl md:text-6xl xl:text-7xl font-black tracking-tighter leading-tight text-white mb-8 whitespace-nowrap">
+            <h2 className="text-4xl md:text-6xl xl:text-7xl font-bold tracking-tighter leading-tight text-white mb-8 whitespace-nowrap">
               The Timber <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-electric-purple">Lights.</span>
             </h2>
             

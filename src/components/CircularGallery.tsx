@@ -239,22 +239,50 @@ class Media {
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.referrerPolicy = 'no-referrer';
-    img.src = this.image;
+    
+    // Optimize Google Drive URL for Three.js textures
+    const id = this.image.split('/').pop()?.split('?')[0];
+    if (this.image.includes('lh3.googleusercontent.com/d/') && id) {
+      img.src = `https://lh3.googleusercontent.com/d/${id}=w600`;
+    } else if (this.image.includes('unsplash.com')) {
+      const url = new URL(this.image);
+      url.searchParams.set('fm', 'webp');
+      url.searchParams.set('w', '600');
+      img.src = url.toString();
+    } else {
+      img.src = this.image;
+    }
+
     img.onload = () => {
+      // Check for corrupted tiny images
+      if (img.naturalWidth < 10 || img.naturalHeight < 10) {
+        img.onerror();
+        return;
+      }
       texture.image = img;
       this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
     };
     img.onerror = () => {
       // Improved Fallback for Google Drive and generic failures
-      if (img.src.includes('lh3.googleusercontent.com/d/')) {
-        img.src = img.src.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-      } else if (img.src.includes('lh3.googleusercontent.com/u/0/d/')) {
-        const id = img.src.split('/').pop();
-        if (id) {
-          img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
-        } else {
-          img.src = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800';
+      const currentSrc = img.src;
+      const getStableDriveUrl = (originalUrl: string, attempt: number) => {
+        const id = originalUrl.split('/').pop()?.split('?')[0];
+        if (!id) return 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800';
+        
+        switch (attempt) {
+          case 1: return `https://lh3.googleusercontent.com/u/0/d/${id}`;
+          case 2: return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
+          case 3: return `https://drive.google.com/uc?id=${id}&export=view`;
+          default: return 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800';
         }
+      };
+
+      if (!img.dataset.retryCount) img.dataset.retryCount = '0';
+      const retryCount = parseInt(img.dataset.retryCount, 10);
+
+      if (retryCount < 3) {
+        img.dataset.retryCount = (retryCount + 1).toString();
+        img.src = getStableDriveUrl(currentSrc, retryCount + 1);
       } else {
         img.src = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800';
       }

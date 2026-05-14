@@ -1,10 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
 import { ScrollVelocity } from './ScrollVelocity';
-import Stack from './Stack';
 import CountUp from './CountUp';
-import { SafeImage } from './SafeImage';
 
 const industryExpertise = [
   "Designer", "Client", "Electrician", "Plumber", "Contractor", 
@@ -15,45 +12,16 @@ const industryExpertise = [
   "Fan", "Handle", "Jali", "Ceiling", "Flooring"
 ];
 
-const stackImages = [
-  "https://lh3.googleusercontent.com/d/1zaZHAGa2m57NF8IZXKgQfkCN6--SVy3I",
-  "https://lh3.googleusercontent.com/d/151kmI4LQypjKjzhQatTQCO-aAXyGuBhE",
-  "https://lh3.googleusercontent.com/d/18ZAqVZ_dUvWc_Ty2yITX2JVYMpQl0C96",
-  "https://lh3.googleusercontent.com/d/18_7CMiYHoSYBhdpz3wpWKfoQkGwhUvof",
-  "https://lh3.googleusercontent.com/d/1EsMLe08jkprzx3ZDo1GAcmzZH3N-Frpp",
-  "https://lh3.googleusercontent.com/d/1H6q1qNWQHacRX-hMgou8B1FiWhRQChA9",
-  "https://lh3.googleusercontent.com/d/1QLoxtToMtlmg-ipEwkZmSlumXOUQN8xl",
-  "https://lh3.googleusercontent.com/d/1RAbB85Awvx_M7HDwpeLTHFHe_hVhD5Ei",
-  "https://lh3.googleusercontent.com/d/1U7YxzdLn1xQcth_3bK9aNjKxS9XHEMJ9",
-  "https://lh3.googleusercontent.com/d/1VizU1uLT7de9piaTNGn2dJ3PFC1Bqc9h",
-  "https://lh3.googleusercontent.com/d/1XibxVzxzjgvmI85XDUywtUpJTUus7bzM",
-  "https://lh3.googleusercontent.com/d/1iQmVJffURWt36pHSEUDtBVea6DohwNui",
-  "https://lh3.googleusercontent.com/d/1ougaUOsunQBGofdyvOBG9Khbgdk0vqUv"
-];
-
 export const Projects: React.FC = () => {
-  const memoizedCards = React.useMemo(() => stackImages.map((src, i) => (
-    <div key={i} className="w-full h-full relative p-2">
-      <SafeImage 
-        src={src} 
-        alt={`card-${i + 1}`} 
-        loading="lazy"
-        decoding="async"
-        className="w-full h-full object-cover rounded-[2rem] border border-white/10 shadow-xl"
-      />
-      <div className="absolute inset-2 rounded-[2rem] bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
-    </div>
-  )), []);
-
   return (
-    <section id="projects" className="pt-0 pb-16 bg-black/30">
+    <section id="projects" className="pt-0 pb-4 bg-black/30">
       <div className="mb-12">
         <ScrollVelocity texts={industryExpertise} velocity={0.6} />
       </div>
       
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col items-center text-center mb-20">
-          <h2 className="text-5xl md:text-8xl font-bold mb-16 leading-tight">
+        <div className="flex flex-col items-center text-center mb-10">
+          <h2 className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
             Our Achievements <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-electric-purple">
               in Numbers
@@ -92,56 +60,12 @@ export const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Stack Integration Section - Refined Proportions */}
-        <div className="py-16 md:py-20 border-y border-white/5 my-12">
-          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20 px-4 md:px-0">
-            {/* Left Column: Visual Stack */}
-            <div className="w-full lg:w-[45%] h-[400px] md:h-[550px] relative order-2 lg:order-1">
-              <Stack
-                randomRotation={true}
-                sensitivity={180}
-                sendToBackOnClick={true}
-                cards={memoizedCards}
-              />
-            </div>
 
-            {/* Right Column: Narrative Content */}
-            <div className="w-full lg:w-[55%] text-left order-1 lg:order-2">
-              <div className="max-w-lg lg:ml-auto">
-                <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tighter">
-                  Project <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-purple to-neon-cyan">
-                    Exploration.
-                  </span>
-                </h2>
-                
-                <div className="w-16 h-1 bg-gradient-to-r from-electric-purple to-neon-cyan mb-10" />
-
-                <p className="text-white/80 text-base md:text-lg leading-relaxed mb-12 font-light tracking-wide">
-                  Step into our world of design, where every project is a journey from vision to reality. 
-                  We combine innovative thinking, smart planning, and refined aesthetics to create spaces 
-                  that inspire modern living and business environments.
-                </p>
-
-                <Link to="/portfolio">
-                  <motion.button 
-                    whileHover={{ scale: 1.05, x: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group flex items-center gap-6 px-12 py-5 bg-white text-black font-bold rounded-full hover:bg-neon-cyan hover:text-white transition-all duration-500 tracking-[0.3em] text-[10px] uppercase shadow-lg"
-                  >
-                    Explore Projects
-                    <span className="text-lg group-hover:translate-x-2 transition-transform duration-300">→</span>
-                  </motion.button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Why Choose DSA Section */}
         <div className="mt-12 relative">
-          <div className="flex flex-col items-center text-center mb-16">
-            <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight">
+          <div className="flex flex-col items-center text-center mb-10">
+            <h2 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight">
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-electric-purple">DSA?</span>
             </h2>
           </div>

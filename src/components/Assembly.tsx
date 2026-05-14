@@ -7,9 +7,9 @@ import { SafeImage } from './SafeImage';
 
 export const Assembly: React.FC = () => {
   return (
-    <section id="founder" className="py-12 bg-[#050505] relative overflow-hidden flex items-center">
-      {/* Deep Void Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0A0A0A] to-black" />
+    <section id="founder" className="pt-8 pb-8 bg-black relative overflow-hidden flex items-center">
+      {/* Black Background */}
+      <div className="absolute inset-0 bg-black" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32 items-center">
@@ -19,7 +19,7 @@ export const Assembly: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <span className="text-neon-cyan text-[10px] font-bold tracking-[0.4em] mb-6 block uppercase font-mono opacity-60">
+            <span className="text-neon-cyan text-sm font-bold tracking-[0.4em] mb-6 block uppercase font-mono opacity-80">
               About Us
             </span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-10 leading-tight tracking-tighter text-white">
@@ -43,7 +43,7 @@ export const Assembly: React.FC = () => {
               <p>
                 Ar. Dhwanish Shah holds a Bachelor of Architecture degree from <span className="text-white/70">Anant National University</span> and brings a strong foundation of design thinking and innovation to every project.
               </p>
-              <p className="italic border-l border-neon-cyan/40 pl-6 py-2 bg-white/5 rounded-r-2xl text-white/70">
+              <p className="border-l border-neon-cyan/40 pl-6 py-2 bg-white/5 rounded-r-2xl text-white/70">
                 In 2026, he further expanded his vision by founding <span className="text-white font-medium">The Timber Light</span>, a brand dedicated to crafting premium lighting solutions using natural wood, blending aesthetics with sustainability.
               </p>
             </div>
@@ -82,7 +82,7 @@ export const Assembly: React.FC = () => {
                   <SafeImage 
                     src="https://lh3.googleusercontent.com/d/11pcH9eTpIsNc2YMB7Sis-jInvHOu_ESl" 
                     alt="Dhwanish Shah - DSA Architects" 
-                    className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
+                    className="w-full h-full object-cover opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
                   />
                 </div>
               </div>
@@ -98,18 +98,18 @@ export const Assembly: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 gap-8 md:gap-32 mt-20 pt-16 border-t border-white/5 text-center max-w-4xl mx-auto"
+          className="grid grid-cols-2 gap-8 md:gap-32 mt-8 pt-8 border-t border-white/5 text-center max-w-4xl mx-auto"
         >
           <div className="flex flex-col items-center">
             <p className="text-4xl md:text-6xl font-display font-medium text-white mb-3 tracking-tighter">2018</p>
             <p className="text-[10px] md:text-xs tracking-[0.3em] text-white/40 uppercase font-bold leading-relaxed">
-              Foundation <span className="text-white/60 block mt-1">DSA Architects</span>
+              Foundation <span className="text-white/60 block mt-1 font-medium">DSA Architects</span>
             </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="text-4xl md:text-6xl font-display font-medium text-white mb-3 tracking-tighter">2026</p>
             <p className="text-[10px] md:text-xs tracking-[0.3em] text-white/40 uppercase font-bold leading-relaxed">
-              Foundation <span className="text-white/60 block mt-1 italic font-light">The Timber Lights</span>
+              Foundation <span className="text-white/60 block mt-1 font-medium">The Timber Lights</span>
             </p>
           </div>
         </motion.div>

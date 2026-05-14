@@ -31,9 +31,9 @@ const services = [
 
 export const Services: React.FC = () => {
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
+    <section id="services" className="pt-8 pb-8 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-24">
+        <div className="text-center mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export const Services: React.FC = () => {
             <p className="text-white text-xl md:text-3xl font-light tracking-wide">
               Complete design and execution solutions.
             </p>
-            <p className="text-white/60 text-base md:text-xl font-light italic">
+            <p className="text-white/60 text-base md:text-xl font-light">
               Tailored for functional, modern, and elegant spaces.
             </p>
           </motion.div>

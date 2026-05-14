@@ -30,7 +30,7 @@ export const WireframeAssembly: React.FC = () => {
             }}
           />
         ))}
-        
+
         <defs>
           <linearGradient id="iridescent-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#007AFF" />

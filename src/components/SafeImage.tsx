@@ -4,6 +4,8 @@ import { cn } from '../lib/utils';
 interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc?: string;
   className?: string;
+  size?: 'small' | 'medium' | 'large' | 'hero';
+  objectFit?: 'cover' | 'contain';
 }
 
 const ARCHITECTURAL_FALLBACKS = [
@@ -17,51 +19,103 @@ export const SafeImage: React.FC<SafeImageProps> = ({
   alt, 
   fallbackSrc = ARCHITECTURAL_FALLBACKS[0],
   className,
+  size = 'medium',
+  objectFit = 'cover',
   ...props 
 }) => {
-  const [currentSrc, setCurrentSrc] = useState(src);
-  const [retryCount, setRetryCount] = useState(0);
-
-  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const img = e.currentTarget;
+  const [currentSrc, setCurrentSrc] = useState(() => {
+    if (!src) return fallbackSrc;
+    // Optimize Unsplash images on initialization
+    if (src.includes('unsplash.com')) {
+      const url = new URL(src);
+      url.searchParams.set('fm', 'webp');
+      url.searchParams.set('q', '75');
+      
+      const width = size === 'small' ? '600' : size === 'medium' ? '1200' : size === 'large' ? '2000' : '2400';
+      url.searchParams.set('w', width);
+      return url.toString();
+    }
     
-    // First retry: Try the Google Drive "u/0" fix
-    if (retryCount === 0 && currentSrc?.includes('lh3.googleusercontent.com/d/')) {
-      const newSrc = currentSrc.replace('lh3.googleusercontent.com/d/', 'lh3.googleusercontent.com/u/0/d/');
-      setRetryCount(1);
-      setCurrentSrc(newSrc);
-    } 
-    // Second retry: Try the thumbnail format
-    else if (retryCount === 1 && currentSrc?.includes('lh3.googleusercontent.com/u/0/d/')) {
-        const id = currentSrc.split('/').pop();
-        if (id) {
-            const newSrc = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
-            setRetryCount(2);
-            setCurrentSrc(newSrc);
-        } else {
-            setRetryCount(3);
-            setCurrentSrc(fallbackSrc);
-        }
+    // Optimize Google Drive for previewing
+    if (src.includes('lh3.googleusercontent.com/d/')) {
+        const id = src.split('/').pop()?.split('?')[0];
+        // Use higher resolution for large/hero
+        const width = size === 'small' ? '400' : size === 'medium' ? '1200' : '2400';
+        return `https://lh3.googleusercontent.com/d/${id}=w${width}`;
     }
-    // Final fallback: Use architectural placeholder
-    else if (retryCount < 3) {
-      setRetryCount(3);
-      setCurrentSrc(fallbackSrc);
-    }
+    
+    return src;
+  });
+  const [retryCount, setRetryCount] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-    if (props.onError) {
-      props.onError(e);
+  const getStableDriveUrl = (originalUrl: string, attempt: number) => {
+    if (!originalUrl) return fallbackSrc;
+    
+    // If it's an Unsplash URL that failed, just return fallback after first retry
+    if (originalUrl.includes('unsplash.com')) return fallbackSrc;
+
+    if (!originalUrl.includes('lh3.googleusercontent.com/d/') && 
+        !originalUrl.includes('lh3.googleusercontent.com/u/0/d/')) return originalUrl;
+
+    const id = originalUrl.split('/').pop()?.split('?')[0];
+    if (!id) return originalUrl;
+
+    switch (attempt) {
+      case 1:
+        return `https://lh3.googleusercontent.com/u/0/d/${id}`;
+      case 2:
+        return `https://drive.google.com/thumbnail?id=${id}&sz=w2000`;
+      case 3:
+        return `https://drive.google.com/uc?id=${id}&export=view`;
+      default:
+        return fallbackSrc;
     }
   };
 
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    if (retryCount < 3) {
+      const nextAttempt = retryCount + 1;
+      const nextSrc = getStableDriveUrl(src || '', nextAttempt);
+      setRetryCount(nextAttempt);
+      setCurrentSrc(nextSrc);
+    } else {
+      setCurrentSrc(fallbackSrc);
+    }
+
+    if (props.onError) props.onError(e);
+  };
+
+  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const img = e.currentTarget;
+    if (img.naturalWidth < 10 || img.naturalHeight < 10) {
+      handleError(e);
+      return;
+    }
+    setIsLoaded(true);
+    if (props.onLoad) props.onLoad(e);
+  };
+
   return (
-    <img
-      {...props}
-      src={currentSrc}
-      alt={alt}
-      onError={handleError}
-      referrerPolicy="no-referrer"
-      className={cn("transition-opacity duration-300", !currentSrc ? "opacity-0" : "opacity-100", className)}
-    />
+    <div className={cn("relative overflow-hidden bg-white/5", className)}>
+      {!isLoaded && (
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer" 
+             style={{ backgroundSize: '200% 100%' }} />
+      )}
+      <img
+        {...props}
+        src={currentSrc}
+        alt={alt}
+        onError={handleError}
+        onLoad={handleLoad}
+        referrerPolicy="no-referrer"
+        loading="lazy"
+        className={cn(
+          "transition-all duration-700 w-full h-full",
+          !isLoaded ? "opacity-0 scale-105 blur-lg" : "opacity-100 scale-100 blur-0",
+          objectFit === "contain" ? "object-contain" : "object-cover"
+        )}
+      />
+    </div>
   );
 };

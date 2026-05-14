@@ -63,7 +63,7 @@ export const InquireModal: React.FC<InquireModalProps> = ({ isOpen, onClose }) =
                     <SafeImage 
                       src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop" 
                       alt="Dream Home" 
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      className="w-full h-full object-cover transition-all duration-700"
                     />
                   </div>
                   <p className="text-white/40 font-medium tracking-widest text-[10px] uppercase mb-4">
@@ -91,21 +91,6 @@ export const InquireModal: React.FC<InquireModalProps> = ({ isOpen, onClose }) =
                 </div>
               </Step>
 
-              <Step>
-                <div className="text-center py-12">
-                  <div className="w-20 h-20 bg-neon-cyan/10 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
-                    <div className="w-10 h-10 bg-neon-cyan rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                  </div>
-                  <h2 className="text-3xl font-bold text-white mb-4">Request Sent!</h2>
-                  <p className="text-white/40 text-lg font-light leading-relaxed">
-                    Ar. Dhwanish Shah will reach out to you within 24 hours.
-                  </p>
-                </div>
-              </Step>
             </Stepper>
           </motion.div>
         </div>

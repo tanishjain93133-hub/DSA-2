@@ -38,6 +38,7 @@ export const About: React.FC = () => {
               <SafeImage
                 src="https://lh3.googleusercontent.com/d/1zIowbroWdab39MHVjBfVN_nqJFCpVJv7"
                 alt="DSA Architectural Studio"
+                size="large"
                 className="w-full h-full object-cover rounded-2xl"
               />
             </div>
@@ -50,7 +51,7 @@ export const About: React.FC = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-8">What is DSA?</h2>
             <p className="text-white/80 text-lg mb-12 leading-relaxed font-light">
-              DSA Architects & Interior Design is a creative studio dedicated to designing modern, functional, and elegant spaces. 
+              <strong className="text-white font-medium">DSA Architects & Interior Design</strong> is a creative studio dedicated to designing modern, functional, and elegant spaces. 
               Founded in 2018 by Ar. Dhwanish Shah, our firm focuses on delivering high-quality architectural and interior solutions that reflect both style and practicality.
             </p>
 

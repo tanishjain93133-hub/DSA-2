@@ -182,11 +182,16 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
           }}
         >
           <div className="chroma-img-wrapper">
-            <SafeImage 
-              src={c.image} 
-              alt={c.title} 
-              loading="lazy" 
-            />
+            {c.image ? (
+              <SafeImage 
+                src={c.image} 
+                alt={c.title} 
+                loading="lazy"
+                className="w-full h-full"
+              />
+            ) : (
+              <div className="w-full h-full bg-white/5 backdrop-blur-sm" />
+            )}
           </div>
           <footer className="chroma-info">
             <h3 className="name">{c.title}</h3>

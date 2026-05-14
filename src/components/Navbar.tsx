@@ -41,11 +41,12 @@ export const Navbar: React.FC = () => {
               <SafeImage 
                 src="https://lh3.googleusercontent.com/d/1DkbTUmi2LgvJdzeMNlrNJw159FzlwrAD" 
                 alt="DSA Logo" 
+                size="small"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-white font-bold tracking-[0.2em] text-[10px] md:text-xs">DSA</span>
+              <span className="text-white font-medium tracking-[0.2em] text-[10px] md:text-xs">DSA</span>
               <span className="text-white/70 tracking-[0.1em] text-[8px] uppercase hidden md:block">Architects & Interiors</span>
             </div>
           </Link>

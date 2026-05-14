@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 
-export const NebulaBackground: React.FC = () => {
+export const NebulaBackground: React.FC = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false }); // Performance optimization
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -106,7 +106,8 @@ export const NebulaBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 -z-10 pointer-events-none opacity-40"
+      className="fixed inset-0 -z-10 pointer-events-none opacity-50"
+      style={{ width: '100%', height: '100%' }}
     />
   );
-};
+});

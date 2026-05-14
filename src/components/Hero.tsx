@@ -61,7 +61,7 @@ export const Hero: React.FC = () => {
                 }}
                 className={cn(
                   "text-lg md:text-2xl font-light tracking-wide",
-                  word.toLowerCase() === "timeless" || word.toLowerCase() === "sophistication," ? "text-neon-cyan italic font-medium" : "text-white/90"
+                  word.toLowerCase() === "timeless" || word.toLowerCase() === "sophistication," ? "text-neon-cyan font-medium" : "text-white/90"
                 )}
               >
                 {word}
@@ -73,7 +73,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.8 }}
-            className="flex flex-wrap justify-center gap-8"
+            className="flex justify-center"
           >
             <Link to="/portfolio" className="group relative px-12 py-5 rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-lg">
               <div className="absolute inset-0 bg-white transition-colors group-hover:bg-neon-cyan" />
@@ -81,25 +81,25 @@ export const Hero: React.FC = () => {
                 Explore Projects
               </span>
             </Link>
-            <Link to="/portfolio" className="px-12 py-5 rounded-full border border-white/10 text-white font-bold tracking-[0.2em] text-xs hover:bg-white/5 transition-all backdrop-blur-md hover:border-white/30">
-              View Portfolio
-            </Link>
           </motion.div>
         </div>
 
         {/* High-End Architectural Background (Visible & Integrated) */}
         <motion.div
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ duration: 3, ease: "easeOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full pointer-events-none"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 0.7, scale: 1 }}
+            transition={{ duration: 3, ease: "easeOut" }}
+            className="absolute inset-0 -z-10 w-full h-full pointer-events-none"
         >
           <SafeImage 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
-            alt="Modern Architectural Render" 
-            className="w-full h-full object-cover grayscale opacity-100"
+            src="https://lh3.googleusercontent.com/d/1X6xG-7r6aVJJEwqXFfLno2nZ6v7rLz21" 
+            alt="Premium Architectural Background" 
+            size="large"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+          {/* Subtle dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian" />
         </motion.div>
       </div>
       
